@@ -43,4 +43,4 @@ diet_challenge(仮)は、ダイエットを継続したい人に向けた
 * 進捗ダッシュボード機能追加（体脂肪率、摂取・消費カロリーなどのグラフ）
 * 既存のヘルスデバイスとの連携（Apple Watchなど）
 
-https://www.figma.com/file/wlCx53FhaGrOURnEpFs1ML/diet_challenge?type=design&node-id=0%3A1&mode=design&t=ybv9J5Ez5aKTb7H9-1
+https://www.figma.com/file/wlCx53FhaGrOURnEpFs1ML/diet_challenge?type=design&node-id=0%3A1&mode=design&t=ybv9J5Ez5aKTb7H9-1 
