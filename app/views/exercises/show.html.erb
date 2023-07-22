@@ -1,0 +1,24 @@
+<h1>Exercise Details</h1>
+
+<p>
+  <strong>Type:</strong>
+  <%= @exercise.exercise_type.name %>
+</p>
+
+<p>
+  <strong>Duration (minutes):</strong>
+  <%= @exercise.duration %>
+</p>
+
+<p>
+  <strong>Calories Burned:</strong>
+  <%= @exercise.calories_burned %>
+</p>
+
+<p>
+  <strong>Date Time:</strong>
+  <%= @exercise.date_time.strftime('%Y-%m-%d %H:%M') %>
+</p>
+
+<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
+<%= link_to 'Back', exercises_path %>

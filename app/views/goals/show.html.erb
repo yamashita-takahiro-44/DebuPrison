@@ -1,0 +1,25 @@
+<h1><%= @goal.title %></h1>
+
+<p>
+  <strong>Description:</strong>
+  <%= @goal.description %>
+</p>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @goal.start_date %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @goal.end_date %>
+</p>
+
+<p>
+  <strong>Target Weight:</strong>
+  <%= @goal.target_weight %>
+</p>
+
+<%= link_to 'Edit', edit_goal_path(@goal) %> |
+<%= link_to 'Delete', goal_path(@goal), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back',

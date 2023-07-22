@@ -1,0 +1,41 @@
+<%= form_with(model: @goal, local: true) do |form| %>
+  <% if @goal.errors.any? %>
+    <div>
+      <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this goal from being saved:</h2>
+      <ul>
+        <% @goal.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div>
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div>
+    <%= form.label :target_weight %>
+    <%= form.number_field :target_weight %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

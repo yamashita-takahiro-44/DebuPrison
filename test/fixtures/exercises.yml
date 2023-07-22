@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  exercise_type: one
+  duration: 1
+  calories_burned: 1
+  date_time: 2023-07-22 12:09:46
+
+two:
+  user: two
+  exercise_type: two
+  duration: 1
+  calories_burned: 1
+  date_time: 2023-07-22 12:09:46

@@ -1,0 +1,28 @@
+<h1>Meals List</h1>
+
+<%= link_to 'New Meal', new_meal_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Calories</th>
+      <th>Date Time</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meals.each do |meal| %>
+      <tr>
+        <td><%= meal.name %></td>
+        <td><%= meal.calories %></td>
+        <td><%= meal.date_time.strftime('%Y-%m-%d %H:%M') %></td>
+        <td>
+          <%= link_to 'Show', meal_path(meal) %> |
+          <%= link_to 'Edit', edit_meal_path(meal) %> |
+          <%= link_to 'Delete', meal_path(meal), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

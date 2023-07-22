@@ -1,0 +1,19 @@
+<h1>Meal Details</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @meal.name %>
+</p>
+
+<p>
+  <strong>Calories:</strong>
+  <%= @meal.calories %>
+</p>
+
+<p>
+  <strong>Date Time:</strong>
+  <%= @meal.date_time.strftime('%Y-%m-%d %H:%M') %>
+</p>
+
+<%= link_to 'Edit', edit_meal_path(@meal) %> |
+<%= link_to 'Back', meals_path %>

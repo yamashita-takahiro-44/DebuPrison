@@ -1,0 +1,24 @@
+<h1>Badges List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @badges.each do |badge| %>
+      <tr>
+        <td><%= badge.name %></td>
+        <td><%= badge.description %></td>
+        <td><%= image_tag badge.image if badge.image.present? %></td>
+        <td>
+          <%= link_to 'Show', badge_path(badge) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

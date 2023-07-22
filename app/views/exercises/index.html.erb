@@ -1,0 +1,30 @@
+<h1>Exercises List</h1>
+
+<%= link_to 'New Exercise', new_exercise_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Duration (minutes)</th>
+      <th>Calories Burned</th>
+      <th>Date Time</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @exercises.each do |exercise| %>
+      <tr>
+        <td><%= exercise.exercise_type.name %></td>
+        <td><%= exercise.duration %></td>
+        <td><%= exercise.calories_burned %></td>
+        <td><%= exercise.date_time.strftime('%Y-%m-%d %H:%M') %></td>
+        <td>
+          <%= link_to 'Show', exercise_path(exercise) %> |
+          <%= link_to 'Edit', edit_exercise_path(exercise) %> |
+          <%= link_to 'Delete', exercise_path(exercise), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

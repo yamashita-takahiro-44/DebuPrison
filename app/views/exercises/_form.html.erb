@@ -1,0 +1,25 @@
+<%= form_with(model: exercise) do |f| %>
+  <div>
+    <%= f.label :exercise_type_id, "Type" %>
+    <%= f.collection_select :exercise_type_id, ExerciseType.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= f.label :duration, "Duration (minutes)" %>
+    <%= f.number_field :duration %>
+  </div>
+
+  <div>
+    <%= f.label :calories_burned, "Calories Burned" %>
+    <%= f.number_field :calories_burned %>
+  </div>
+
+  <div>
+    <%= f.label :date_time %>
+    <%= f.datetime_field :date_time %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<h1><%= @badge.name %></h1>
+
+<p>
+  <strong>Description:</strong>
+  <%= @badge.description %>
+</p>
+
+<p>
+  <strong>Image:</strong><br>
+  <%= image_tag @badge.image if @badge.image.present? %>
+</p>
+
+<h2>Users who have this badge:</h2>
+<ul>
+  <% @badge.users.each do |user| %>
+    <li>
+      <%= link_to user.name, user_path(user) %> (Awarded on: <%= user.user_badges.find_by(badge_id: @badge.id).created_at.strftime('%Y-%m-%d') %>)
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', badges_path %>

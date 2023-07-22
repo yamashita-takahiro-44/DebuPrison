@@ -1,0 +1,43 @@
+<h1>Welcome, <%= current_user.name %>!</h1>
+
+<h2>Your Recent Meals</h2>
+<% @meals.each do |meal| %>
+  <div>
+    <strong><%= meal.name %></strong>
+    <p><%= meal.calories %> kcal</p>
+    <p><%= meal.date_time.strftime("%Y-%m-%d %H:%M") %></p>
+  </div>
+<% end %>
+<%= link_to 'All Meals', meals_path %>
+
+<h2>Your Recent Exercises</h2>
+<% @exercises.each do |exercise| %>
+  <div>
+    <strong><%= exercise.exercise_type.name %></strong>
+    <p><%= exercise.duration %> minutes</p>
+    <p><%= exercise.calories_burned %> kcal burned</p>
+    <p><%= exercise.date_time.strftime("%Y-%m-%d %H:%M") %></p>
+  </div>
+<% end %>
+<%= link_to 'All Exercises', exercises_path %>
+
+<h2>Your Goals</h2>
+<% @goals.each do |goal| %>
+  <div>
+    <strong><%= goal.title %></strong>
+    <p><%= goal.description %></p>
+    <p>From: <%= goal.start_date %> To: <%= goal.end_date %></p>
+    <p>Target Weight: <%= goal.target_weight %> kg</p>
+  </div>
+<% end %>
+<%= link_to 'All Goals', goals_path %>
+
+<h2>Recent Posts</h2>
+<% @recent_posts.each do |post| %>
+  <div>
+    <strong><%= post.content.truncate(100) %></strong>
+    <p><%= post.user.name %></p>
+    <p><%= post.created_at.strftime("%Y-%m-%d") %></p>
+  </div>
+<% end %>
+<%= link_to 'All Posts', posts_path %>

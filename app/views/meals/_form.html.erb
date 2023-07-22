@@ -1,0 +1,20 @@
+<%= form_with(model: meal) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :calories %>
+    <%= f.number_field :calories %>
+  </div>
+
+  <div>
+    <%= f.label :date_time %>
+    <%= f.datetime_field :date_time %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

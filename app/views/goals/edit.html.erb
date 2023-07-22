@@ -1,0 +1,9 @@
+<% if @goal.new_record? %>
+  <h1>New Goal</h1>
+<% else %>
+  <h1>Edit Goal</h1>
+<% end %>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', goals_path %>
