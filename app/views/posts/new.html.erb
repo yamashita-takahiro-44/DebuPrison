@@ -1,9 +1,7 @@
-<% if @post.new_record? %>
-  <h1>New Post</h1>
-<% else %>
-  <h1>Edit Post</h1>
-<% end %>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', posts_path %>
+<% content_for(:title, t('.title')) %>
+<div class="main_image py-16">
+  <div class="row">
+    <h1 class="text-3xl items-center justify-center text-center pb-16"><%= t '.title' %></h1>
+    <%= render 'form', { post: @post } %>
+  </div>
+</div>

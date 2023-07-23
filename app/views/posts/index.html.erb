@@ -1,25 +1,17 @@
-<h1>Posts</h1>
-<%= link_to 'New Post', new_post_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Image</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= truncate(post.content, length: 50) %></td>
-        <td><%= image_tag(post.image.url) if post.image.present? %></td>
-        <td>
-          <%= link_to 'Show', post_path(post) %>
-          <%= link_to 'Edit', edit_post_path(post) %>
-          <%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% content_for(:title, t('.title')) %>
+<div class="main_image items-center justify-center text-center">
+  <h1 class="text-3xl py-10"><%= t '.title' %></h1>
+  <section class="main_image items-center justify-center text-center">
+    <div class="container mx-auto">
+      <div class="flex flex-wrap justify-center pb-16">
+        <% if @posts.present? %>
+          <%= render @posts %>
+        <% else %>
+          <p class="text-2xl"><%= t('.no_result') %></p>
+        <% end %>
+      </div>
+      <div class="flex justify-center text-center text-3xl pb-16">
+      </div>
+    </div>
+  </section>
+</div>

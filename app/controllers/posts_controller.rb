@@ -6,6 +6,9 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+    set_meta_tags og: { image: view_context.image_url(@post.image.url) }, twitter: { image: view_context.image_url(@post.image.url) }
+    # ... 他のコード ...
   end
 
   def new
@@ -46,6 +49,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, :image)
+    params.require(:post).permit(:content, :image, :title)
   end
 end

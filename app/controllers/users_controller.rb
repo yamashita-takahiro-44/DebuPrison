@@ -43,6 +43,6 @@ class UsersController < ApplicationController
 
   def user_params
     # 許可されたパラメータのみを通す
-    params.require(:user).permit(:name, :email, :avatar, :profile)
+    params.require(:user).permit(:name, :email, :avatar, :profile, :current_weight)
   end
 end

@@ -1,0 +1,14 @@
+ja:
+  titles:
+    diet_challenge: "ダイエットチャレンジ"
+  dashboards:
+    show:
+      title: "ダッシュボード"
+  profiles:
+    show:
+      title: "プロフィール"
+  defaults:
+    logout: "ログアウト"
+  posts:
+    show:
+      title: "投稿詳細"

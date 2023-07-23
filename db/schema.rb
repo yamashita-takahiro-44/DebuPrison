@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_032558) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_135111) do
   create_table "badges", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -65,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_032558) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -89,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_032558) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
+    t.float "current_weight"
   end
 
   add_foreign_key "exercises", "exercise_types"

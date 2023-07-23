@@ -75,3 +75,10 @@ gem 'pg'
 gem 'devise'
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
+
+gem "tailwindcss-rails", "~> 2.0"
+
+gem "dartsass-rails", "~> 0.5.0"
+gem 'cssbundling-rails'
+
+gem 'meta-tags'

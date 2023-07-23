@@ -1,0 +1,18 @@
+<h1>Profile</h1>
+
+<p>Name: <%= @user.name %></p>
+<p>Email: <%= @user.email %></p>
+<p>Profile: <%= @user.profile %></p>
+
+<p>
+  Avatar:
+  <% if @user.avatar.present? %>
+    <%= image_tag @user.avatar, alt: "User's Avatar" %>
+  <% else %>
+    No avatar uploaded.
+  <% end %>
+</p>
+
+<p>Current Weight: <%= @user.current_weight %> kg</p>
+
+<%= link_to 'Edit Profile', edit_profile_path %>

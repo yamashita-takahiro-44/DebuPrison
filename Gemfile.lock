@@ -92,6 +92,11 @@ GEM
       ssrf_filter (~> 1.0)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    cssbundling-rails (1.2.0)
+      railties (>= 6.0.0)
+    dartsass-rails (0.5.0)
+      railties (>= 6.0.0)
+      sass-embedded (~> 1.63)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -106,6 +111,7 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    google-protobuf (3.23.4-x86_64-darwin)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -130,6 +136,8 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
+    meta-tags (2.18.0)
+      actionpack (>= 3.2.0, < 7.1)
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
@@ -195,6 +203,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
+    sass-embedded (1.64.1-x86_64-darwin)
+      google-protobuf (~> 3.23)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -209,6 +219,8 @@ GEM
     sqlite3 (1.6.3-x86_64-darwin)
     ssrf_filter (1.1.1)
     stimulus-rails (1.2.1)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.30-x86_64-darwin)
       railties (>= 6.0.0)
     thor (1.2.2)
     timeout (0.4.0)
@@ -244,10 +256,13 @@ DEPENDENCIES
   bootsnap
   capybara
   carrierwave (~> 2.0)
+  cssbundling-rails
+  dartsass-rails (~> 0.5.0)
   debug
   devise
   importmap-rails
   jbuilder
+  meta-tags
   mini_magick
   pg
   puma (~> 5.0)
@@ -256,6 +271,7 @@ DEPENDENCIES
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
+  tailwindcss-rails (~> 2.0)
   turbo-rails
   tzinfo-data
   web-console

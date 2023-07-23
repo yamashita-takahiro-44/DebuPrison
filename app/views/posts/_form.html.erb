@@ -1,26 +1,27 @@
-<%= form_with(model: @post, local: true) do |form| %>
-  <% if @post.errors.any? %>
-    <div>
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
-        <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= form_with model: post, local: true do |f| %>
+  <div class="flex items-center justify-center text-center relative">
+    <%= render 'shared/error_messages', object: f.object %>
+  </div>
+  <div class="flex items-center justify-center text-center relative pb-8">
+    <div class="form-group items-center text-2xl">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control input input-bordered input-primary w-full' %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <div class="flex items-center justify-center text-center relative pb-8">
+    <div class="form-group items-center text-2xl">
+      <%= f.label :content %>
+      <%= f.text_field :content, class: 'form-control input input-bordered input-primary w-full' %>
+    </div>
+  <div class="flex items-center justify-center text-center relative">
+    <div class="form-group items-center text-2xl">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: 'form-control file-input file-input-bordered file-input-info w-full max-w-xs', accept: 'image/*' %>
+      <%= f.hidden_field :image_cache %>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="flex items-center justify-center text-center relative pt-16">
+    <div class="form-group items-center">
+      <%= f.submit class: 'btn btn-primary font-bold' %>
+    </div>
   </div>
 <% end %>

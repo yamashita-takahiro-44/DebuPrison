@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="cupcake" class="font-top text-maincolor">
   <head>
     <title>DietChallenge</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/95ae21fd7d.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application.tailwind', "data-turbo-track": "reload", media: 'all' %>
     <%= javascript_importmap_tags %>
-    <% if user_signed_in? %>
-  <%= link_to 'Dashboard', root_path %>
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Login', new_user_session_path %>
-  <%= link_to 'Sign up', new_user_registration_path %>
-<% end %>
+    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JLLP5YDYPQ');
+    </script>
   </head>
-
   <body>
+    <% if user_signed_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
+    <% end %>
+    <%= render 'shared/flash_message' %>
     <%= yield %>
+    <%= render 'shared/footer' %>
   </body>
 </html>
+
