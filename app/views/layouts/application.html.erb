@@ -10,7 +10,6 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application.tailwind', "data-turbo-track": "reload", media: 'all' %>
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -18,6 +17,7 @@
       gtag('js', new Date());
       gtag('config', 'G-JLLP5YDYPQ');
     </script>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body>
     <% if user_signed_in? %>

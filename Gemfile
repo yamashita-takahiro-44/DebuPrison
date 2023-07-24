@@ -82,3 +82,12 @@ gem "dartsass-rails", "~> 0.5.0"
 gem 'cssbundling-rails'
 
 gem 'meta-tags'
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "redis", "~> 5.0"
+
+gem 'httparty'
+gem 'jsbundling-rails'
+
+gem 'dotenv-rails', groups: [:development, :test]

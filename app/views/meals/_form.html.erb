@@ -1,18 +1,23 @@
 <%= form_with(model: meal) do |f| %>
   <div>
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, id: "meal_name" %>
   </div>
 
   <div>
     <%= f.label :calories %>
-    <%= f.number_field :calories %>
+    <%= f.number_field :calories, id: "meal_calories" %>
   </div>
 
   <div>
     <%= f.label :date_time %>
     <%= f.datetime_field :date_time %>
   </div>
+
+  <div id="food-search-results">
+    <!-- ここに食品検索の結果が表示される -->
+  </div>
+    <%= debug @foods %>
 
   <div>
     <%= f.submit %>

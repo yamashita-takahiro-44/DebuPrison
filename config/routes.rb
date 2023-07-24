@@ -24,5 +24,8 @@ Rails.application.routes.draw do
 
   get 'privacy', to: 'pages#privacy', as: 'privacy'
   get 'service', to: 'pages#service', as: 'service'
+
+  get 'foods/search', to: 'foods#search'
+
 end
 

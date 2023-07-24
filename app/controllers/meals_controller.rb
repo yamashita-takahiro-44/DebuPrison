@@ -34,6 +34,13 @@ class MealsController < ApplicationController
     redirect_to meals_path, notice: 'Meal was successfully deleted.'
   end
 
+  def search
+    service = FatSecretApiService.new
+    @foods = service.search_food(params[:query])
+
+    render json: @foods
+  end
+
   private
 
   def set_meal

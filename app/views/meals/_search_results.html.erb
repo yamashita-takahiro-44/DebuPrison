@@ -1,0 +1,7 @@
+<% @foods.each do |food| %>
+  <div class="food-item" data-food-name="<%= food['name'] %>" data-calories="<%= food['calories'] %>">
+    <%= food['name'] %> - <%= food['calories'] %> kcal
+    <!-- 以下のボタンをクリックすると、食品名とカロリーがフォームに入力されます -->
+    <button class="select-food-btn">選択</button>
+  </div>
+<% end %>
