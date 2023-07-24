@@ -1,3 +1,4 @@
 import "stylesheets/application.scss";
 import 'alpinejs'
-require("meal_search");
+import "./meal_search.js";
+require("turbolinks").start()
