@@ -1,18 +1,27 @@
-<h1>Profile</h1>
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-md w-96">
+    <h1 class="text-center text-2xl font-bold mb-4">Profile</h1>
+    <p class="text-center mb-2"><strong>Name:</strong> <%= @user.name %></p>
+    <p class="text-center mb-2"><strong>Email:</strong> <%= @user.email %></p>
+    <p class="text-center mb-2"><strong>Profile:</strong> <%= @user.profile %></p>
+    
+    <div class="text-center mb-4">
+      <strong>Avatar:</strong>
+      <% if @user.avatar.present? %>
+        <%= image_tag @user.avatar, alt: "User's Avatar", class: "mx-auto mt-2 rounded-full" %>
+      <% else %>
+        <p>No avatar uploaded.</p>
+      <% end %>
+    </div>
 
-<p>Name: <%= @user.name %></p>
-<p>Email: <%= @user.email %></p>
-<p>Profile: <%= @user.profile %></p>
+    <p class="text-center mb-2"><strong>Gender:</strong> <%= @user.gender %></p>
+    <p class="text-center mb-2"><strong>Age:</strong> <%= @user.age_public ? @user.age : 'Private' %> years</p>
+    <p class="text-center mb-2"><strong>Height:</strong> <%= @user.height_public ? @user.height : 'Private' %> cm</p>
+    <p class="text-center mb-2"><strong>Current Weight:</strong> <%= @user.weight_public ? @user.current_weight : 'Private' %> kg</p>
+    <p class="text-center mb-2"><strong>Basal Metabolic Rate:</strong> <%= basal_metabolic_rate(@user).round(2) %> kcal/day</p>
 
-<p>
-  Avatar:
-  <% if @user.avatar.present? %>
-    <%= image_tag @user.avatar, alt: "User's Avatar" %>
-  <% else %>
-    No avatar uploaded.
-  <% end %>
-</p>
-
-<p>Current Weight: <%= @user.current_weight %> kg</p>
-
-<%= link_to 'Edit Profile', edit_profile_path %>
+    <div class="text-center mt-4">
+      <%= link_to 'Edit Profile', edit_profile_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  </div>
+</div>

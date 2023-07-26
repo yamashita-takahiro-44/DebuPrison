@@ -1,27 +1,34 @@
-<%= form_with model: post, local: true do |f| %>
-  <div class="flex items-center justify-center text-center relative">
+<%= form_with model: post, local: true, class: 'mx-auto max-w-xl' do |f| %>
+  <div class="flex flex-col items-center justify-center text-center relative mb-6">
     <%= render 'shared/error_messages', object: f.object %>
   </div>
-  <div class="flex items-center justify-center text-center relative pb-8">
-    <div class="form-group items-center text-2xl">
+
+  <div class="flex flex-col items-center justify-center text-center relative mb-6">
+    <div class="form-group w-full text-2xl mb-4">
       <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control input input-bordered input-primary w-full' %>
+      <%= f.text_field :title, class: 'form-control input input-bordered input-primary w-full mt-2' %>
     </div>
-    <div class="flex items-center justify-center text-center relative pb-8">
-    <div class="form-group items-center text-2xl">
+  </div>
+
+  <div class="flex flex-col items-center justify-center text-center relative mb-6">
+    <div class="form-group w-full text-2xl mb-4">
       <%= f.label :content %>
-      <%= f.text_field :content, class: 'form-control input input-bordered input-primary w-full' %>
+      <%= f.text_field :content, class: 'form-control input input-bordered input-primary w-full mt-2' %>
     </div>
-  <div class="flex items-center justify-center text-center relative">
-    <div class="form-group items-center text-2xl">
+  </div>
+
+  <div class="flex flex-col items-center justify-center text-center relative mb-6">
+    <div class="form-group w-full text-2xl mb-4">
       <%= f.label :image %>
-      <%= f.file_field :image, class: 'form-control file-input file-input-bordered file-input-info w-full max-w-xs', accept: 'image/*' %>
+      <%= f.file_field :image, class: 'form-control file-input file-input-bordered file-input-info w-full max-w-xs mt-2', accept: 'image/*' %>
       <%= f.hidden_field :image_cache %>
     </div>
   </div>
-  <div class="flex items-center justify-center text-center relative pt-16">
-    <div class="form-group items-center">
-      <%= f.submit class: 'btn btn-primary font-bold' %>
+
+  <div class="flex flex-col items-center justify-center text-center relative pt-6">
+    <div class="form-group">
+      <%= f.submit 'Submit', class: 'btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-bold' %>
     </div>
   </div>
 <% end %>
+

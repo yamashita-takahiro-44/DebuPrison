@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   # それぞれのリソースに関する標準のCRUDルート
-  resources :meals
+  resources :meals do
+    collection do
+      get 'calorie_search'
+    end
+  end
   resources :exercises
   resources :badges, only: [:index, :show]
   resources :goals
@@ -26,6 +30,12 @@ Rails.application.routes.draw do
   get 'service', to: 'pages#service', as: 'service'
 
   get 'foods/search', to: 'foods#search'
+
+  resources :exercises do
+    collection do
+      get 'calculate_calories'
+    end
+  end
 
 end
 

@@ -6,6 +6,7 @@
     "esbuild": "^0.18.16",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.27",
+    "rails_admin": "3.1.2",
     "tailwindcss": "^3.3.3"
   },
   "scripts": {

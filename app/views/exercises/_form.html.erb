@@ -1,25 +1,50 @@
-<%= form_with(model: exercise) do |f| %>
-  <div>
-    <%= f.label :exercise_type_id, "Type" %>
-    <%= f.collection_select :exercise_type_id, ExerciseType.all, :id, :name %>
+<%= form_with(model: exercise, class: 'space-y-4 max-w-md mx-auto') do |f| %>
+  <div class="flex flex-col">
+    <%= f.label :exercise_type_id, "Type", class: 'mb-2 font-semibold' %>
+    <%= f.collection_select :exercise_type_id, ExerciseType.all, :id, :name, {}, {class: 'form-input w-full p-2 border rounded'} %>
   </div>
 
-  <div>
-    <%= f.label :duration, "Duration (minutes)" %>
-    <%= f.number_field :duration %>
+  <div class="flex flex-col">
+    <%= f.label :duration, "Duration (minutes)", class: 'mb-2 font-semibold' %>
+    <%= f.number_field :duration, class: 'form-input w-full p-2 border rounded' %>
   </div>
 
-  <div>
-    <%= f.label :calories_burned, "Calories Burned" %>
-    <%= f.number_field :calories_burned %>
+  <div class="flex flex-col">
+    <%= f.label :calories_burned, "Calories Burned", class: 'mb-2 font-semibold' %>
+    <%= f.number_field :calories_burned, placeholder: "自動計算のため入力不要です", class: 'form-input w-full p-2 border rounded' %>
   </div>
 
-  <div>
-    <%= f.label :date_time %>
-    <%= f.datetime_field :date_time %>
+
+  <div class="flex flex-col">
+    <%= f.label :date_time, class: 'mb-2 font-semibold' %>
+    <%= f.datetime_field :date_time, class: 'form-input w-full p-2 border rounded' %>
   </div>
 
-  <div>
-    <%= f.submit %>
+  <div class="flex justify-center mt-6">
+    <%= f.submit 'Submit', class: 'bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-bold' %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("turbolinks:load", function() {
+    const exerciseTypeSelect = document.querySelector("#exercise_exercise_type_id");
+    const durationInput = document.querySelector("#exercise_duration");
+    const caloriesBurnedInput = document.querySelector("#exercise_calories_burned");
+
+    function fetchCaloriesBurned() {
+      const exerciseTypeId = exerciseTypeSelect.value;
+      const duration = durationInput.value;
+
+      if (exerciseTypeId && duration) {
+        fetch(`/exercises/calculate_calories?exercise_type_id=${exerciseTypeId}&duration=${duration}`)
+          .then(response => response.json())
+          .then(data => {
+            caloriesBurnedInput.value = data.calories_burned;
+          });
+      }
+    }
+
+    exerciseTypeSelect.addEventListener("change", fetchCaloriesBurned);
+    durationInput.addEventListener("input", fetchCaloriesBurned);
+  });
+</script>

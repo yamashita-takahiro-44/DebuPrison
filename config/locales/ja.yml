@@ -12,3 +12,22 @@ ja:
   posts:
     show:
       title: "投稿詳細"
+
+  activerecord:
+    attributes:
+      meal:
+        meal_period: '食事の時期'
+        meal_type: '食事のタイプ'
+
+  enums:
+    meal:
+      meal_period:
+        breakfast: '朝食'
+        lunch: '昼食'
+        dinner: '夕食'
+        nosh: 'おやつ'
+      meal_type:
+        self_catering: '自炊'
+        eating_out: '外食'
+        to_go: 'テイクアウト'
+        convenience_store: 'コンビニ'

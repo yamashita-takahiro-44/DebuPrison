@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_initialize :set_default_public_settings
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,5 +18,13 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       # 他の必要な初期設定を追加
     end
+  end
+
+  private
+  
+  def set_default_public_settings
+    self.age_public ||= false
+    self.height_public ||= false
+    self.weight_public ||= false
   end
 end

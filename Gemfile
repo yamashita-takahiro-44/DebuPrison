@@ -90,4 +90,18 @@ gem 'httparty'
 gem 'jsbundling-rails'
 gem 'turbolinks'
 
+gem 'kaminari'
+
+# i18n対応
+gem 'rails-i18n', '~> 7.0.0'
+
+# カレンダー機能
+gem 'simple_calendar', '~> 2.4'
+
+# サイトマップの作成
+gem 'sitemap_generator'
+
+gem 'enum_help'
+gem 'faraday'
+
 gem 'dotenv-rails', groups: [:development, :test]
