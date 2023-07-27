@@ -3,82 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- その他のhead要素（スタイルやメタデータ）をここに追加 -->
     <title>Your Page Title Here</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="min-h-screen bg-gray-100 p-6">
-        <div class="max-w-7xl mx-auto flex flex-wrap">
+        <div class="min-h-screen bg-gray-100 p-6">
+        <div class="max-w-7xl mx-auto h-screen"> 
 
-    <!-- Left side: user info and recent actions -->
-    <div class="w-3/5 pr-8">
-
-      <h1 class="text-3xl font-bold mb-6">Welcome, <%= current_user.name %>!</h1>
-
-      <!-- Meals Section -->
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4">Your Recent Meals</h2>
-        <% @meals.each do |meal| %>
-          <div class="bg-white p-4 mb-4 rounded shadow">
-            <strong class="text-lg"><%= meal.name %></strong>
-            <p><%= meal.calories %> kcal</p>
-          </div>
-        <% end %>
-        <%= link_to 'All Meals', meals_path, class: "text-blue-500 hover:underline" %>
-      </section>
-
-      <!-- Exercises Section -->
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4">Your Recent Exercises</h2>
-        <% @exercises.each do |exercise| %>
-          <div class="bg-white p-4 mb-4 rounded shadow">
-            <strong class="text-lg"><%= exercise.exercise_type.name %></strong>
-            <p><%= exercise.duration %> minutes</p>
-            <p><%= exercise.calories_burned %> kcal burned</p>
-            <p><%= exercise.date_time.strftime("%Y-%m-%d %H:%M") %></p>
-          </div>
-        <% end %>
-        <%= link_to 'All Exercises', exercises_path, class: "text-blue-500 hover:underline" %>
-      </section>
-
-      <!-- Goals Section -->
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4">Your Goals</h2>
-        <% @goals.each do |goal| %>
-          <div class="bg-white p-4 mb-4 rounded shadow">
-            <strong class="text-lg"><%= goal.title %></strong>
-            <p><%= goal.description %></p>
-            <p>From: <%= goal.start_date %> To: <%= goal.end_date %></p>
-            <p>Target Weight: <%= goal.target_weight %> kg</p>
-          </div>
-        <% end %>
-        <%= link_to 'All Goals', goals_path, class: "text-blue-500 hover:underline" %>
-      </section>
-
-      <!-- Recent Posts Section -->
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4">Recent Posts</h2>
-        <% @recent_posts.each do |post| %>
-          <div class="bg-white p-4 mb-4 rounded shadow">
-            <strong class="text-lg"><%= post.content.truncate(100) %></strong>
-            <p><%= post.user.name %></p>
-            <p><%= post.created_at.strftime("%Y-%m-%d") %></p>
-          </div>
-        <% end %>
-        <%= link_to 'All Posts', posts_path, class: "text-blue-500 hover:underline" %>
-      </section>
-
-      <div class="mt-4">
-        <%= link_to 'Badges', badges_path, class: "text-blue-500 hover:underline" %>
-      </div>
-    </div>
-
-            <!-- Right side: Weight graph -->
-            <div class="w-2/5 pl-8">
-                <div class="bg-white rounded p-4 shadow">
-                    <h2 class="text-2xl font-semibold mb-4">Weight Progress</h2>
-                    <div class="h-64 bg-gray-200 rounded relative">
+            <!-- Full-width Weight graph -->
+            <div class="w-full h-full"> 
+                <div class="bg-white rounded p-4 shadow h-full"> 
+                    <div class="h-full bg-gray-200 rounded relative"> 
                         <canvas id="weightProgressChart"></canvas>
                     </div>
                 </div>
@@ -88,73 +23,71 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-    var ctx = document.getElementById('weightProgressChart').getContext('2d');
+            var ctx = document.getElementById('weightProgressChart').getContext('2d');
 
-    // コントローラーから取得した値をJavaScriptに埋め込む
-    var currentWeight = <%= @current_weight %>;
-    var targetWeight = <%= @target_weight %>;
-    var basalMetabolicRate = <%= @basal_metabolic_rate %>;
-    var totalCaloriesBurned = <%= @total_calories_burned %>;
-    var totalCaloriesEaten = <%= @total_calories_eaten %>;
-    var totalCaloriesBurnedAndBMR = basalMetabolicRate + totalCaloriesBurned; // 基礎代謝 + 消費カロリー
+            var currentWeight = <%= @current_weight %>;
+            var targetWeight = <%= @target_weight %>;
+            var basalMetabolicRate = <%= @basal_metabolic_rate %>;
+            var totalCaloriesBurned = <%= @total_calories_burned %>;
+            var totalCaloriesEaten = <%= @total_calories_eaten %>;
+            var totalCaloriesBurnedAndBMR = basalMetabolicRate + totalCaloriesBurned;
 
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['現在の体重', '目標体重', '基礎代謝+消費カロリー', '本日の食事の総摂取カロリー'],
-            datasets: [{
-                type: 'line', // 折れ線グラフ
-                label: '体重 (kg)',
-                data: [currentWeight, targetWeight, null, null], // 体重のデータ
-                yAxisID: 'y-axis-weight', // 体重のy軸を指定
-                fill: false,
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderWidth: 1
-            },
-            {
-                type: 'bar', // 棒グラフ
-                label: 'カロリー',
-                data: [null, null, totalCaloriesBurnedAndBMR, totalCaloriesEaten], // カロリーのデータ
-                yAxisID: 'y-axis-calories', // カロリーのy軸を指定
-                backgroundColor: [
-                    'rgba(0,0,0,0)',
-                    'rgba(0,0,0,0)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(0,0,0,0)',
-                    'rgba(0,0,0,0)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(54, 162, 235, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    id: 'y-axis-weight', // 体重のy軸のID
-                    position: 'left', // 左側に配置
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }, {
-                    id: 'y-axis-calories', // カロリーのy軸のID
-                    position: 'right', // 右側に配置
-                    ticks: {
-                        beginAtZero: true
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['現在の体重', '目標体重', '基礎代謝+消費カロリー', '本日の食事の総摂取カロリー'],
+                    datasets: [{
+                        type: 'line',
+                        label: '体重 (kg)',
+                        data: [currentWeight, targetWeight, null, null],
+                        yAxisID: 'y-axis-weight',
+                        fill: false,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 1
                     },
-                    gridLines: {
-                        display: false // カロリーのy軸のグリッドラインを非表示にする
+                    {
+                        type: 'bar',
+                        label: 'カロリー',
+                        data: [null, null, totalCaloriesBurnedAndBMR, totalCaloriesEaten],
+                        yAxisID: 'y-axis-calories',
+                        backgroundColor: [
+                            'rgba(0,0,0,0)',
+                            'rgba(0,0,0,0)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(0,0,0,0)',
+                            'rgba(0,0,0,0)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            id: 'y-axis-weight',
+                            position: 'left',
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }, {
+                            id: 'y-axis-calories',
+                            position: 'right',
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            gridLines: {
+                                display: false
+                            }
+                        }]
                     }
-                }]
-            }
-        }
-    });
-});
+                }
+            });
+        });
 
     </script>
 </body>

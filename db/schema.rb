@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_035003) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_021428) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -78,8 +78,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_035003) do
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
-# Could not dump table "meal_details" because of following StandardError
-#   Unknown type '' for column 'meal_id'
+  create_table "meal_details", force: :cascade do |t|
+    t.string "meal_title", null: false
+    t.integer "meal_weight", null: false
+    t.integer "meal_calorie", null: false
+    t.integer "meal_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_meal_details_on_meal_id"
+  end
 
   create_table "meals", force: :cascade do |t|
     t.integer "user_id", null: false

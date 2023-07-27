@@ -1,11 +1,11 @@
 <div class="min-h-screen bg-gray-100 flex items-center justify-center">
   <div class="bg-white p-8 rounded-lg shadow-md w-3/4">
-    <h1 class="text-center text-2xl font-bold mb-6">Edit Profile</h1>
+    <h1 class="text-center text-2xl font-bold mb-6"><%= t('profiles.edit.title') %></h1>
 
     <%= form_with(model: @user, url: profile_path, local: true) do |form| %>
       <% if @user.errors.any? %>
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-          <strong class="block"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</strong>
+          <strong class="block"><%= pluralize(@user.errors.count, t('profiles.edit.errors_title')) %> <%= t('profiles.edit.errors_message') %>:</strong>
           <ul class="list-disc pl-5 mt-2">
             <% @user.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -15,67 +15,72 @@
       <% end %>
 
       <div class="mb-4">
-        <%= form.label :name, class: "block text-sm font-bold mb-2" %>
+        <%= form.label :name, t('profiles.edit.name'), class: "block text-sm font-bold mb-2" %>
         <%= form.text_field :name, id: :user_name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
       <div class="mb-4">
-        <%= form.label :email, class: "block text-sm font-bold mb-2" %>
+        <%= form.label :email, t('profiles.edit.email'), class: "block text-sm font-bold mb-2" %>
         <%= form.text_field :email, id: :user_email, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
       <div class="mb-4">
-        <%= form.label :gender, class: "block text-sm font-bold mb-2" %>
-        <%= form.select :gender, ['Male', 'Female'], {}, class: "block w-full mt-1 rounded-md shadow-sm bg-white focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+        <%= form.label :gender, t('profiles.edit.gender'), class: "block text-sm font-bold mb-2" %>
+       <%= form.select :gender, ['Male', 'Female'], {}, class: "block w-full mt-1 rounded-md shadow-sm bg-white focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
       </div>
 
       <div class="mb-4">
-        <%= form.label :age, "年齢", class: "block text-sm font-bold mb-2" %>
+        <%= form.label :age, t('profiles.edit.age'), class: "block text-sm font-bold mb-2" %>
         <%= form.number_field :age, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
       <div class="mb-4">
-        <%= form.label :height, "身長", class: "block text-sm font-bold mb-2" %>
+        <%= form.label :height, t('profiles.edit.height'), class: "block text-sm font-bold mb-2" %>
         <%= form.number_field :height, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
       <div class="mb-4">
-        <%= form.label :current_weight, class: "block text-sm font-bold mb-2" %>
+        <%= form.label :current_weight, t('profiles.edit.current_weight'), class: "block text-sm font-bold mb-2" %>
         <%= form.number_field :current_weight, id: :user_current_weight, step: 0.1, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
       <div class="mb-4 flex items-center">
-        <%= form.label :age_public, "年齢を公開しますか？", class: "mr-4 text-sm font-bold" %>
+        <%= form.label :age_public, t('profiles.edit.age_public'), class: "mr-4 text-sm font-bold" %>
         <%= form.check_box :age_public, class: "form-checkbox h-5 w-5 text-blue-600" %>
       </div>
 
       <div class="mb-4 flex items-center">
-        <%= form.label :height_public, "身長を公開しますか？", class: "mr-4 text-sm font-bold" %>
+        <%= form.label :height_public, t('profiles.edit.height_public'), class: "mr-4 text-sm font-bold" %>
         <%= form.check_box :height_public, class: "form-checkbox h-5 w-5 text-blue-600" %>
       </div>
 
       <div class="mb-4 flex items-center">
-        <%= form.label :weight_public, "体重を公開しますか？", class: "mr-4 text-sm font-bold" %>
+        <%= form.label :weight_public, t('profiles.edit.weight_public'), class: "mr-4 text-sm font-bold" %>
         <%= form.check_box :weight_public, class: "form-checkbox h-5 w-5 text-blue-600" %>
       </div>
 
       <div class="mb-4">
-        <%= form.label :profile, class: "block text-sm font-bold mb-2" %>
-        <%= form.text_area :profile, id: :user_profile, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <%= form.label :target_weight, t('profiles.edit.target_weight'), class: "block text-sm font-bold mb-2" %>
+        <%= form.number_field :target_weight, value: @goal.target_weight, step: 0.1, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
       <div class="mb-4">
-        <%= form.label :avatar, class: "block text-sm font-bold mb-2" %>
+        <%= form.label :profile, t('profiles.edit.profile_description'), class: "block text-sm font-bold mb-2" %>
+        <%= form.text_area :profile, id: :user_profile, rows: 5, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :avatar, t('profiles.edit.avatar'), class: "block text-sm font-bold mb-2" %>
         <%= form.file_field :avatar, id: :user_avatar, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
       <div class="mt-6">
-        <%= form.submit "Update Profile", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
+        <%= form.submit t('profiles.edit.submit_button'), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800 w-full" %>
       </div>
     <% end %>
 
     <div class="text-center mt-4">
-      <%= link_to 'Back', profile_path, class: "text-blue-500 hover:underline" %>
+      <%= link_to t('profiles.edit.back_button'), profile_path, class: "text-blue-500 hover:underline" %>
     </div>
   </div>
 </div>

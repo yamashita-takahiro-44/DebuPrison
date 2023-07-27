@@ -2,8 +2,7 @@ class MealsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @meals = Meal.includes(:meal_images_attachments, :meal_details, :user).order(meal_date: :desc).page(params[:page])
-
+    @meals = current_user.meals.includes(:meal_images_attachments, :meal_details, :user).order(meal_date: :desc).page(params[:page])
   end
 
   def show
@@ -42,7 +41,7 @@ class MealsController < ApplicationController
         images.each(&:purge)
         @meal.meal_images.attach(params[:meal][:meal_images])
       end
-      redirect_to user_path(current_user), success: t('defaults.message.updated', item: Meal.model_name.human)
+      redirect_to dashboard_path, success: t('defaults.message.updated', item: Meal.model_name.human)
     else
       flash.now['error'] = t('defaults.message.not_updated', item: Meal.model_name.human)
       render :edit, status: :unprocessable_entity
@@ -53,7 +52,7 @@ class MealsController < ApplicationController
     @meal = current_user.meals.find(params[:id])
     redirect_to root_url, status: :see_other if @meal.nil?
     @meal.destroy!
-    redirect_to user_path(current_user), success: t('defaults.message.deleted', item: Meal.model_name.human)
+    redirect_to dashboard_path, success: t('defaults.message.deleted', item: Meal.model_name.human)
   end
 
   def calorie_search

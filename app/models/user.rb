@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :goals
+  accepts_nested_attributes_for :goals, reject_if: :all_blank, allow_destroy: true
   has_many :meals
   has_many :exercises
   has_many :posts

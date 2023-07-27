@@ -1,9 +1,10 @@
 {
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
     "@rails/webpacker": "^6.0.0-rc.6",
     "alpinejs": "^3.12.3",
     "autoprefixer": "^10.4.14",
-    "esbuild": "^0.18.16",
+    "esbuild": "^0.18.17",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.27",
     "rails_admin": "3.1.2",

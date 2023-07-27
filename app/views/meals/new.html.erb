@@ -1,6 +1,6 @@
 <% set_meta_tags title: (t '.title') %>
 <div class="p-4 flex flex-col w-full">
-  <h1 class="text-xl font-bold"><%= t '.title' %></h1>
+  <h1 class="text-xl font-bold mb-6"><%= t '.title' %></h1>
   <%= turbo_frame_tag 'calorie_search' do %>
     <div>
       <%= render 'calorie_search', response: @response %>
@@ -9,60 +9,65 @@
   <div class="mt-6">
     <%= form_with model: @meal_form, local: true do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-      <div class="form-control">
-        <%= f.label :meal_date, class: "text-xl pt-4 font-bold" %>
-        <%= f.date_field :meal_date, value: Time.now.strftime("%Y-%m-%d"), class: "input input-bordered" %>
-        <%= f.label :meal_period, class: "text-xl pt-4 font-bold" %>
-        <%= f.select :meal_period, Meal.meal_periods.keys.map { |k| [I18n.t("enums.meal.meal_period.#{k}"), k] }, {}, class: "select select-bordered w-full" %>
-        <%= f.label :meal_type, class: "text-xl pt-4 font-bold" %>
-        <%= f.select :meal_type, Meal.meal_types.keys.map { |k| [I18n.t("enums.meal.meal_type.#{k}"), k] }, {}, class: "select select-bordered w-full" %>
-        <div class="m-2">
-          <p>食事メニュー, g数, カロリーを最低1つ（1の欄）入力してください</p>
-          <div class="flex-col md:flex" data-controller="meal-detail-form">
-            <div class="p-2 bg-base-200 rounded-lg">
-              <div class="form-control">
-                <%= f.label :meal_title_first, class: "text-xl font-bold" %>
-                <%= f.text_field :meal_title_first, class: "input input-bordered" %>
-              </div>
-              <div class="form-control">
-                <%= f.label :meal_weight_first, class: "text-xl font-bold" %>
-                <%= f.number_field :meal_weight_first, class: "input input-bordered" %>
-              </div>
-              <div class="form-control">
-                <%= f.label :meal_calorie_first, class: "text-xl font-bold" %>
-                <%= f.number_field :meal_calorie_first, class: "input input-bordered" %>
-              </div>
+      <div>
+        <div class="mb-4">
+          <%= f.label :meal_date, class: "block text-xl font-bold mb-2" %>
+          <%= f.date_field :meal_date, value: Time.now.strftime("%Y-%m-%d"), class: "p-2 border rounded w-full" %>
+        </div>
+        <div class="mb-4">
+          <%= f.label :meal_period, class: "block text-xl font-bold mb-2" %>
+          <%= f.select :meal_period, Meal.meal_periods.keys.map { |k| [I18n.t("enums.meal.meal_period.#{k}"), k] }, {}, class: "p-2 border rounded w-full" %>
+        </div>
+        <div class="mb-4">
+          <%= f.label :meal_type, class: "block text-xl font-bold mb-2" %>
+          <%= f.select :meal_type, Meal.meal_types.keys.map { |k| [I18n.t("enums.meal.meal_type.#{k}"), k] }, {}, class: "p-2 border rounded w-full" %>
+        </div>
+        <p class="mb-2">食事メニュー, g数, カロリーを最低1つ（1の欄）入力してください</p>
+        <div data-controller="meal-detail-form">
+          <div class="p-4 bg-gray-200 rounded">
+            <div class="mb-4">
+              <%= f.label :meal_title_first, class: "block text-xl font-bold mb-2" %>
+              <%= f.text_field :meal_title_first, class: "p-2 border rounded w-full" %>
             </div>
-            <div class="my-2 p-2 bg-base-200 rounded-lg hidden meal-detail-form" data-meal-detail-form-target="mealDetailForm">
-              <div class="form-control">
-                <%= f.label :meal_title_second, class: "text-xl font-bold" %>
-                <%= f.text_field :meal_title_second, class: "input input-bordered" %>
-              </div>
-              <div class="form-control">
-                <%= f.label :meal_weight_second, class: "text-xl font-bold" %>
-                <%= f.number_field :meal_weight_second, class: "input input-bordered" %>
-              </div>
-              <div class="form-control">
-                <%= f.label :meal_calorie_second, class: "text-xl font-bold" %>
-                <%= f.number_field :meal_calorie_second, class: "input input-bordered" %>
-              </div>
+            <div class="mb-4">
+              <%= f.label :meal_weight_first, class: "block text-xl font-bold mb-2" %>
+              <%= f.number_field :meal_weight_first, class: "p-2 border rounded w-full" %>
             </div>
-            <div class="my-2 p-2 bg-base-200 rounded-lg hidden meal-detail-form" data-meal-detail-form-target="mealDetailForm">
-              <div class="form-control">
-                <%= f.label :meal_title_third, class: "text-xl font-bold"%>
-                <%= f.text_field :meal_title_third, class: "input input-bordered" %>
-              </div>
-              <div class="form-control">
-                <%= f.label :meal_weight_third, class: "text-xl font-bold" %>
-                <%= f.number_field :meal_weight_third, class: "input input-bordered" %>
-              </div>
-              <div class="form-control">
-                <%= f.label :meal_calorie_third, class: "text-xl font-bold" %>
-                <%= f.number_field :meal_calorie_third, class: "input input-bordered" %>
-              </div>
+            <div class="mb-4">
+              <%= f.label :meal_calorie_first, class: "block text-xl font-bold mb-2" %>
+              <%= f.number_field :meal_calorie_first, class: "p-2 border rounded w-full" %>
             </div>
-            <div class="flex">
-              <%= button_tag type: "button", data: { action: "click->meal-detail-form#add" }, class: "add btn btn-ghost my-2" do %>
+          </div>
+            <div class="p-4 bg-gray-200 rounded hidden" data-meal-detail-form-target="mealDetailForm">
+            <div class="mb-4">
+              <%= f.label :meal_title_second, class: "block text-xl font-bold mb-2" %>
+              <%= f.text_field :meal_title_second, class: "p-2 border rounded w-full" %>
+            </div>
+            <div class="mb-4">
+              <%= f.label :meal_weight_second, class: "block text-xl font-bold mb-2" %>
+              <%= f.number_field :meal_weight_second, class: "p-2 border rounded w-full" %>
+            </div>
+            <div class="mb-4">
+              <%= f.label :meal_calorie_second, class: "block text-xl font-bold mb-2" %>
+              <%= f.number_field :meal_calorie_second, class: "p-2 border rounded w-full" %>
+            </div>
+          </div>
+            <div class="p-4 bg-gray-200 rounded hidden" data-meal-detail-form-target="mealDetailForm">
+            <div class="mb-4">
+              <%= f.label :meal_title_third, class: "block text-xl font-bold mb-2" %>
+              <%= f.text_field :meal_title_third, class: "p-2 border rounded w-full" %>
+            </div>
+            <div class="mb-4">
+              <%= f.label :meal_weight_third, class: "block text-xl font-bold mb-2" %>
+              <%= f.number_field :meal_weight_third, class: "p-2 border rounded w-full" %>
+            </div>
+            <div class="mb-4">
+              <%= f.label :meal_calorie_third, class: "block text-xl font-bold mb-2" %>
+              <%= f.number_field :meal_calorie_third, class: "p-2 border rounded w-full" %>
+            </div>
+          </div>
+          <div class="flex">
+            <%= button_tag type: "button", data: { action: "click->meal-detail-form#add" }, class: "add btn btn-ghost my-2" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-8 text-primary" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
               <% end %>
               <%= button_tag type: "button", data: { action: "click->meal-detail-form#delete" }, class: "delete btn btn-ghost my-2" do %>
@@ -71,12 +76,17 @@
               <p class="m-2 self-center">メニュー3まで追加可能</p>
             </div>
           </div>
+        <div class="mt-4">
+          <%= f.label :meal_memo, class: "block text-xl font-bold mb-2" %>
+          <%= f.text_area :meal_memo, class: "p-2 border rounded w-full" %>
         </div>
-        <%= f.label :meal_memo, class: "text-xl pt-4 font-bold" %>
-        <%= f.text_area :meal_memo, class: "textarea textarea-bordered" %>
-        <%= f.label :meal_images, class: "text-xl pt-4 font-bold" %>
-        <%= f.file_field :meal_images, class: "input input-bordered", multiple: true %>
-        <%= f.submit '投稿する', class: "btn btn-primary my-4"%>
+        <div class="mt-4">
+          <%= f.label :meal_images, class: "block text-xl font-bold mb-2" %>
+          <%= f.file_field :meal_images, class: "p-2 border rounded w-full", multiple: true %>
+        </div>
+        <div class="mt-4">
+          <%= f.submit '投稿する', class: "py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700" %>
+        </div>
       </div>
     <% end %>
   </div>

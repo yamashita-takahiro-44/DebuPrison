@@ -1,19 +1,64 @@
-<h1>Meal Details</h1>
-
-<p>
-  <strong>Name:</strong>
-  <%= @meal.name %>
-</p>
-
-<p>
-  <strong>Calories:</strong>
-  <%= @meal.calories %>
-</p>
-
-<p>
-  <strong>Date Time:</strong>
-  <%= @meal.date_time.strftime('%Y-%m-%d %H:%M') %>
-</p>
-
-<%= link_to 'Edit', edit_meal_path(@meal) %> |
-<%= link_to 'Back', meals_path %>
+<% set_meta_tags title: (t '.title') %>
+<div class="m-8 flex flex-col w-full">
+  <h1 class="text-xl font-bold"><%= t '.title' %></h1>
+    <div class="grid card rounded-box place-items-center">
+      <div class="flex max-w-full">
+        <div class="avatar max-w-max my-8 mx-4">
+          <div class="w-24 h-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <% if @user.avatar.present? %>
+            <%= image_tag @user.avatar.variant(:thumb) %>
+            <% else %>
+            <%= image_tag('default-avatar.png', size: "400x400") %>
+            <% end %>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="m-4">
+            <h2 class="font-bold text-lg">ユーザー名</h2>
+            <p><%= @user.name %><p>
+        </div>
+      </div>
+    </div> 
+    <div class="divider"></div> 
+    <div class="grid card rounded-box">
+      <div class="flex justify-around">
+        <div class="w-2/5 flex flex-col align-center">
+          <h2 class="text-xl font-bold my-4 text-center"><%= @meal.meal_date.strftime("%Y年%m月%d日") %></h2>
+          <% if @meal.meal_images.attached? %>
+            <% @meal.meal_images.each do |meal_image|%>
+              <%= image_tag meal_image.variant(:thumb), class: "flex items-center m-2" if meal_image.representable? %>
+            <% end %>
+          <% else %>
+            <%= image_tag('meal_sample.png', size: "400x400") %>
+          <% end %>
+        </div>
+        <div class="w-3/5 flex flex-col">
+          <div class="mx-8 mt-4">
+            <h2 class="text-xl font-bold">メニュー名</h2>
+            <p class="text-base"><%= @meal.meal_details.pluck(:meal_title).join(' , ') %></p>
+          </div>
+          <div class="mx-8 mt-4">
+            <h2 class="text-xl font-bold">食事タイミング</h2>
+            <p class="text-base"><%= @meal.meal_period_i18n %></p>
+          </div>
+          <div class="mx-8 mt-4">
+            <h2 class="text-xl font-bold">食事タイプ</h2>
+            <p class="text-base"><%= @meal.meal_type_i18n %></p>
+          </div>
+          <div class="mx-8 mt-4">
+            <h2 class="text-xl font-bold">カロリー</h2>
+            <p class="text-base"><%= @meal.meal_details.pluck(:meal_calorie).sum %> kcal</p>
+          </div>
+          <div class="mx-8 mt-4">
+            <h2 class="text-xl font-bold">メモ</h2>
+            <p class="text-base md:w-96 break-words"><%= @meal.meal_memo %></p>
+          </div>
+          <div class="flex items-center mx-8 mt-4">
+          </div>
+          <div class="mx-8 mt-4">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

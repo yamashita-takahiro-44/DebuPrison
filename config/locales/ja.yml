@@ -1,4 +1,22 @@
 ja:
+  helpers:
+    label:
+      meal:
+        meal_date: "日付"
+        meal_period: "食事の時間帯"
+        meal_type: "食事のタイプ"
+        meal_title_first: "食事メニュー (1)"
+        meal_weight_first: "g数 (1)"
+        meal_calorie_first: "カロリー (1)"
+        meal_title_second: "食事メニュー (2)"
+        meal_weight_second: "g数 (2)"
+        meal_calorie_second: "カロリー (2)"
+        meal_title_third: "食事メニュー (3)"
+        meal_weight_third: "g数 (3)"
+        meal_calorie_third: "カロリー (3)"
+        meal_memo: "メモ"
+        meal_images: "画像"
+
   titles:
     diet_challenge: "ダイエットチャレンジ"
   dashboards:
@@ -12,6 +30,60 @@ ja:
   posts:
     show:
       title: "投稿詳細"
+
+  exercises:
+    index:
+      title: "エクササイズリスト"
+      new_exercise: "新しいエクササイズ"
+      table:
+        type: "種類"
+        duration: "時間（分）"
+        calories_burned: "消費カロリー"
+        date_time: "日付・時間"
+        actions: "操作"
+        show: "表示"
+        edit: "編集"
+        delete: "削除"
+        delete_confirmation: "本当に削除してもよろしいですか？"
+
+  profiles:
+    show:
+      title: "プロフィール"
+      name: "名前"
+      email: "メール"
+      profile_description: "プロフィール"
+      avatar: "アバター"
+      no_avatar: "アバターはアップロードされていません。"
+      gender: "性別"
+      age: "年齢"
+      age_private: "非公開"
+      height: "身長"
+      height_private: "非公開"
+      current_weight: "現在の体重"
+      weight_private: "非公開"
+      bmr: "基礎代謝"
+      target_weight: "目標体重まで"
+      not_set: "設定されていません"
+      edit_button: "プロフィールを編集"
+    edit:
+      title: "プロフィール編集"
+      name: "名前"
+      email: "メールアドレス"
+      gender: "性別"
+      age: "年齢"
+      height: "身長"
+      current_weight: "現在の体重"
+      age_public: "年齢を公開しますか？"
+      height_public: "身長を公開しますか？"
+      weight_public: "体重を公開しますか？"
+      target_weight: "目標体重"
+      profile_description: "プロフィール"
+      avatar: "アバター"
+      submit_button: "プロフィール更新"
+      back_button: "戻る"
+      errors_title: "エラー"
+      errors_message: "このユーザーの保存を禁止しました"
+
 
   activerecord:
     attributes:

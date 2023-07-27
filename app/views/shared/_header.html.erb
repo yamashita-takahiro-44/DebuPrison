@@ -1,12 +1,78 @@
+<style>
+    .custom-green {
+        background-color: #191970;
+    }
+
+    .dropdown-hover:hover .dropdown-content {
+        display: block !important;
+    }
+
+    /* 追加: 親要素を動かさないためのスタイル */
+    .dropdown-hover {
+        position: relative;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        top: 100%; /* ボタンの下に配置 */
+        left: 0;
+    }
+    .menu-button-space {
+        margin-right: 20px; /* あるいは、任意のピクセル数に変更して調整してください */
+    }
+</style>
+
 <header data-theme="retro" class="py-10 bg-blue-500">
   <div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
     <div class="font-title">
-      <%= link_to "Diet Challenge", root_path, class: "text-5xl text-headfoot" %>
+      <%= link_to root_path do %>
+        <%= image_tag 'logo.png', width: 220, height: 220, alt: "Diet Challenge Logo"%>
+      <% end %>
     </div>
-    <div class="md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
-      <%= link_to (t 'dashboards.show.title'), dashboard_path, class: "btn mr-5 text-headfoot"%>
-      <%= link_to (t "profiles.show.title"), profile_path, class: "btn mr-5 text-headfoot" %>
-      <%= button_to (t 'defaults.logout'), destroy_user_session_path, method: :delete, class: "btn mr-5 text-headfoot" %>
+    <div class="md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center menu-button-space"> 
+      <%= link_to (t 'dashboards.show.title'), dashboard_path, class: "text-headfoot custom-green shadow-md p-2 rounded text-white menu-button-space" %>
+
+      <div class="relative inline-block dropdown-hover menu-button-space">
+        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
+          食事記録
+        </button>
+        <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
+          <%= link_to '一覧', meals_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+          <%= link_to '作成', new_meal_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+        </ul>
+      </div>
+
+      <div class="relative inline-block dropdown-hover menu-button-space">
+        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
+          運動記録
+        </button>
+        <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
+          <%= link_to '一覧', exercises_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+          <%= link_to '作成', new_exercise_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+        </ul>
+      </div>
+
+      <div class="relative inline-block dropdown-hover menu-button-space">
+        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
+          掲示板
+        </button>
+        <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
+          <%= link_to '一覧', posts_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+          <%= link_to '作成', new_post_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+        </ul>
+      </div>
+
+      <div class="relative inline-block dropdown-hover menu-button-space">
+        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
+          プロフィール
+        </button>
+        <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
+          <%= link_to '表示', profile_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+          <%= link_to '編集', edit_profile_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+        </ul>
+      </div>
+
+      <%= button_to (t 'defaults.logout'), destroy_user_session_path, method: :delete, class: "text-headfoot custom-green shadow-md p-2 rounded text-white" %>
       <div class="avatar">
         <div class="w-16 rounded-full">
           <%= image_tag current_user.avatar.present? ? current_user.avatar.url : 'default-avatar.png' %>

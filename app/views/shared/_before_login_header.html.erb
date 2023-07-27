@@ -1,11 +1,18 @@
-<header data-theme="retro", class= "py-20">
-  <div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
-    <div class="font-title">
-      <%= link_to "Diet Challenge", root_path, class: "text-5xl text-headfoot" %>
+<header data-theme="retro" class="py-6 bg-blue-600 shadow-md">
+  <div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center px-4">
+    
+    <!-- Logo -->
+    <div class="mb-4 md:mb-0">
+      <%= link_to root_path do %>
+        <%= image_tag 'logo.png', width: 220, height: 220, alt: "Diet Challenge Logo", class: "mx-auto md:mx-0" %>
+      <% end %>
     </div>
-    <div class="md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
-      <%= link_to (t 'defaults.loginpage'), new_user_session_path, class: "btn mr-5 text-headfoot"%>
-      <%= link_to (t 'defaults.register_page'), new_user_registration_path, class: "btn mr-5 text-headfoot"%>
+    
+    <!-- Navigation Links -->
+    <div class="md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center mt-4 md:mt-0">
+      <%= link_to (t 'defaults.loginpage'), new_user_session_path, class: "btn text-white bg-blue-800 hover:bg-blue-900 py-2 px-4 rounded mr-4" %>
+      <%= link_to (t 'defaults.register_page'), new_user_registration_path, class: "btn text-white bg-green-500 hover:bg-green-600 py-2 px-4 rounded" %>
     </div>
+
   </div>
 </header>

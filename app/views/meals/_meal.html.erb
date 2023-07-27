@@ -1,37 +1,36 @@
-<div class="card card-compact h-28 bg-base-100 shadow-xl image-full mx-4 my-2 md:card-side md:w-96">
-  <% if meal.meal_images.attached? %>
-    <figure><%= image_tag meal.meal_images.last.variant(:thumb) %></figure>
-  <% else %>
-    <figure><%= image_tag('meal_sample.png', size: "400x400") %></figure>
-  <% end %>
-  <div class="card-body flex flex-row justify-start">
-    <div class="w-6/12">
-    <%= link_to meal_path(meal.id) do %>
-      <h2 class="card-title truncate block w-36"><%= meal.meal_details.pluck(:meal_title).join(',') %></h2>
-      <p><%= meal.meal_details.pluck(:meal_calorie).sum %> kcal / <%= meal.meal_period_i18n %></p>
-      <p><%= meal.meal_date.strftime("%Y年%m月%d日") %></p>
+<div class="bg-white shadow-lg mx-4 my-2 md:w-96 rounded-lg overflow-hidden">
+  <div class="relative h-40">
+    <% if meal.meal_images.attached? %>
+      <%= image_tag meal.meal_images.last.variant(resize: '400x400^'), class: "absolute h-full w-full object-cover" %>
+    <% else %>
+      <%= image_tag('meal_sample.png', class: "absolute h-full w-full object-cover") %>
     <% end %>
+  </div>
+  <div class="p-4 flex flex-row justify-between">
+    <div>
+      <%= link_to meal_path(meal.id) do %>
+        <h2 class="text-lg font-bold truncate"><%= meal.meal_details.pluck(:meal_title).join(',') %></h2>
+        <p><%= meal.meal_details.pluck(:meal_calorie).sum %> kcal / <%= meal.meal_period_i18n %></p>
+        <p><%= meal.meal_date.strftime("%Y年%m月%d日") %></p>
+      <% end %>
     </div>
-    <div class="w-4/12">
-      <%=link_to user_path(meal.user) do%>
-        <div class="flex flex-col items-center mx-auto">
-          <div class="avatar">
-            <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <% if meal.user.avatar.attached? %>
-              <%= image_tag meal.user.avatar.variant(:thumb) %>
-              <% else %>
-              <%= image_tag('default-avatar.png', size: "400x400") %>
-              <% end %>
-            </div>
+    <div>
+      <%= link_to profile_path(meal.user) do %>
+        <div class="flex items-center">
+          <div class="w-12 h-12 relative mr-2">
+            <% if meal.user.avatar.present? %>
+              <%= image_tag meal.user.avatar.url(:thumb), class: "rounded-full object-cover w-full h-full border-2 border-primary-500" %>
+            <% else %>
+              <%= image_tag('default-avatar.png', class: "rounded-full object-cover w-full h-full border-2 border-primary-500") %>
+            <% end %>
           </div>
-          <div class="font-bold items-center">
-            <p class="m-2"><%= meal.user.name %></p>
-          </div>
+          <p class="font-bold"><%= meal.user.name %></p>
         </div>
       <% end %>
     </div>
-    <div class="w-2/12 flex items-center">
-      <%= render 'meal_likes/meal_like_button', meal: meal %>
-    </div>
+  </div>
+  <div class="p-4 border-t border-gray-200 flex justify-between">
+    <%= link_to '編集', edit_meal_path(meal), class: "text-blue-500 hover:text-blue-700" %>
+    <%= button_to '削除', meal_path(meal), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "text-red-500 hover:text-red-700" %>
   </div>
 </div>
