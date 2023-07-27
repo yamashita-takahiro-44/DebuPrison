@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Deviseのルート設定
   devise_for :users, controllers: {
     # コントローラーやオプションがある場合、ここに追記
+    registrations: 'users/registrations' 
   }
   devise_scope :user do
     post 'users/guest_sign_in', to: 'application#guest_sign_in'

@@ -2,7 +2,7 @@ class MealsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @meals = current_user.meals.includes(:meal_details, :user).order(meal_date: :desc).page(params[:page])
+    @meals = current_user.meals.includes(:meal_details, :user).order(meal_date: :desc).page(params[:page]).per(15)
   end
 
   def show

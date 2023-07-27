@@ -1,5 +1,6 @@
 module ApplicationHelper
   def basal_metabolic_rate(user)
+    return 0 unless user.current_weight && user.height && user.age
     if user.gender == "Male"
       return ((13.397 * user.current_weight) + (4.799 * user.height) - (5.677 * user.age) + 88.362 ) * 1.5
     elsif user.gender == "Female"

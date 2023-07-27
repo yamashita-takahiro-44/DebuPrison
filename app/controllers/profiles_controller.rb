@@ -16,8 +16,10 @@ class ProfilesController < ApplicationController
   def update
     @user.assign_attributes(user_params.except(:target_weight))
     
+    # ここで@goalを初期化する
+    @goal = @user.goals.first_or_initialize
+  
     if @user.valid?
-      @goal = @user.goals.first_or_initialize
       @goal.target_weight = user_params[:target_weight]
   
       if @user.save && @goal.save
@@ -29,6 +31,7 @@ class ProfilesController < ApplicationController
       render :edit
     end
   end
+  
 
   private
 
