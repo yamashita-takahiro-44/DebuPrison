@@ -1,4 +1,4 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class MealImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -18,17 +18,18 @@ class AvatarUploader < CarrierWave::Uploader::Base
     # 'something.jpg' if original_filename
     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
-  
+
   version :thumb do
     process resize_to_limit: [400, 400]
   end
 
-  protected
-  # 一意となるトークンを作成
-  def secure_token
-     var = :"@#{mounted_as}_secure_token"
-     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
-  end
+protected
+# 一意となるトークンを作成
+def secure_token
+   var = :"@#{mounted_as}_secure_token"
+   model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+end
+
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:

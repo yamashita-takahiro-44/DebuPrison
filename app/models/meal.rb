@@ -10,4 +10,6 @@ class Meal < ApplicationRecord
 
   validates :meal_images, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg|jpg)\Z}, maximum: 5_242_880 }
 
+  mount_uploaders :meal_images, MealImageUploader
+
 end

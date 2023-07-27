@@ -5,7 +5,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   process resize_to_fit: [800, 800]
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  storage :aws
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -14,9 +14,21 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  def filename
+    # 'something.jpg' if original_filename
+    "#{secure_token}.#{file.extension}" if original_filename.present?
+  end
+
   version :thumb do
     process resize_to_limit: [400, 400]
   end
+
+protected
+# 一意となるトークンを作成
+def secure_token
+   var = :"@#{mounted_as}_secure_token"
+   model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)

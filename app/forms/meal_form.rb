@@ -37,54 +37,24 @@ class MealForm
   def save
     return false if invalid?
 
-    # bugfix
     if meal.meal_details.size > 3
-      n = meal.meal_details.size
-      while n > 3
-        meal.meal_details[n - 1].delete
-        n -= 1
+      (3...meal.meal_details.size).each do
+        meal.meal_details.last.delete
       end
     end
-    # ここまで
 
     ActiveRecord::Base.transaction do
       if meal.meal_images.blank?
-        meal.update!(meal_date:, meal_period:, meal_type:, meal_memo:, user_id:, meal_images:)
+        meal.update!(meal_date: meal_date, meal_period: meal_period, meal_type: meal_type, meal_memo: meal_memo, user_id: user_id)
       else
-        meal.update!(meal_date:, meal_period:, meal_type:, meal_memo:, user_id:)
+        meal.update!(meal_date: meal_date, meal_period: meal_period, meal_type: meal_type, meal_memo: meal_memo, user_id: user_id, meal_images: meal_images)
       end
-
-      if meal.meal_details.blank?
-        meal.meal_details.create!(meal_title: meal_title_first, meal_weight: meal_weight_first, meal_calorie: meal_calorie_first)
-      else
-        meal.meal_details.first.update!(meal_title: meal_title_first, meal_weight: meal_weight_first,
-                                        meal_calorie: meal_calorie_first)
-      end
-
-      if meal_title_second.blank?
-        next if meal.meal_details.second.nil?
-
-        meal.meal_details.second.delete
-      elsif meal.meal_details.second.blank?
-        meal.meal_details.build(meal_title: meal_title_second, meal_weight: meal_weight_second,
-                                meal_calorie: meal_calorie_second).save!
-      else
-        meal.meal_details.second.update!(meal_title: meal_title_second, meal_weight: meal_weight_second,
-                                         meal_calorie: meal_calorie_second)
-      end
-
-      if meal_title_third.blank?
-        next if meal.meal_details.third.nil?
-
-        meal.meal_details.third.delete
-      elsif meal.meal_details.third.blank?
-        meal.meal_details.build(meal_title: meal_title_third, meal_weight: meal_weight_third,
-                                meal_calorie: meal_calorie_third).save!
-      else
-        meal.meal_details.third.update!(meal_title: meal_title_third, meal_weight: meal_weight_third,
-                                        meal_calorie: meal_calorie_third)
-      end
+      
+      update_or_create_detail(meal_title_first, meal_weight_first, meal_calorie_first, 0)
+      update_or_create_detail(meal_title_second, meal_weight_second, meal_calorie_second, 1)
+      update_or_create_detail(meal_title_third, meal_weight_third, meal_calorie_third, 2)
     end
+
     meal
   rescue ActiveRecord::RecordInvalid
     errors.merge!(meal.errors)
@@ -95,20 +65,26 @@ class MealForm
     meal
   end
 
-  private
-
   attr_reader :meal
 
+  private
+
+  def update_or_create_detail(title, weight, calorie, index)
+    detail = meal.meal_details[index]
+    
+    if title.blank?
+      detail&.delete
+      return
+    end
+
+    if detail
+      detail.update!(meal_title: title, meal_weight: weight, meal_calorie: calorie)
+    else
+      meal.meal_details.create!(meal_title: title, meal_weight: weight, meal_calorie: calorie)
+    end
+  end
+
   def default_attributes
-    meal_title_first = meal.meal_details.first.nil? ? '' : meal.meal_details.first.meal_title
-    meal_weight_first = meal.meal_details.first.nil? ? '' : meal.meal_details.first.meal_weight
-    meal_calorie_first = meal.meal_details.first.nil? ? '' : meal.meal_details.first.meal_calorie
-    meal_title_second = meal.meal_details.second.nil? ? '' : meal.meal_details.second.meal_title
-    meal_weight_second = meal.meal_details.second.nil? ? '' : meal.meal_details.second.meal_weight
-    meal_calorie_second = meal.meal_details.second.nil? ? '' : meal.meal_details.second.meal_calorie
-    meal_title_third = meal.meal_details.third.nil? ? '' : meal.meal_details.third.meal_title
-    meal_weight_third = meal.meal_details.third.nil? ? '' : meal.meal_details.third.meal_weight
-    meal_calorie_third = meal.meal_details.third.nil? ? '' : meal.meal_details.third.meal_calorie
     {
       user_id: meal.user_id,
       meal_date: meal.meal_date,
@@ -116,15 +92,27 @@ class MealForm
       meal_type: meal.meal_period_before_type_cast,
       meal_memo: meal.meal_memo,
       meal_images: meal.meal_images,
-      meal_title_first:,
-      meal_weight_first:,
-      meal_calorie_first:,
-      meal_title_second:,
-      meal_weight_second:,
-      meal_calorie_second:,
-      meal_title_third:,
-      meal_weight_third:,
-      meal_calorie_third:
+      meal_title_first: meal_title_or_empty(0),
+      meal_weight_first: meal_weight_or_empty(0),
+      meal_calorie_first: meal_calorie_or_empty(0),
+      meal_title_second: meal_title_or_empty(1),
+      meal_weight_second: meal_weight_or_empty(1),
+      meal_calorie_second: meal_calorie_or_empty(1),
+      meal_title_third: meal_title_or_empty(2),
+      meal_weight_third: meal_weight_or_empty(2),
+      meal_calorie_third: meal_calorie_or_empty(2)
     }
+  end
+
+  def meal_title_or_empty(index)
+    meal.meal_details[index]&.meal_title || ''
+  end
+
+  def meal_weight_or_empty(index)
+    meal.meal_details[index]&.meal_weight || ''
+  end
+
+  def meal_calorie_or_empty(index)
+    meal.meal_details[index]&.meal_calorie || ''
   end
 end

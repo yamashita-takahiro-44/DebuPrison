@@ -103,4 +103,5 @@ gem 'sitemap_generator'
 gem 'enum_help'
 gem 'faraday'
 
+gem 'carrierwave-aws'
 gem 'dotenv-rails', groups: [:development, :test]

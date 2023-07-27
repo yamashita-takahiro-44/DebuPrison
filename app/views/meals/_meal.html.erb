@@ -1,10 +1,10 @@
 <div class="bg-white shadow-lg mx-4 my-2 md:w-96 rounded-lg overflow-hidden">
   <div class="relative h-40">
-    <% if meal.meal_images.attached? %>
-      <%= image_tag meal.meal_images.last.variant(resize: '400x400^'), class: "absolute h-full w-full object-cover" %>
-    <% else %>
-      <%= image_tag('meal_sample.png', class: "absolute h-full w-full object-cover") %>
-    <% end %>
+    <% if meal.meal_images.any? %>
+  <%= image_tag meal.meal_images.last.thumb.url, class: "absolute h-full w-full object-cover" %>
+<% else %>
+  <%= image_tag('meal_sample.png', class: "absolute h-full w-full object-cover") %>
+<% end %>
   </div>
   <div class="p-4 flex flex-row justify-between">
     <div>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
     <div>
-      <%= link_to profile_path(meal.user) do %>
+      <%= link_to profile_show_path(current_user.id) do %>
         <div class="flex items-center">
           <div class="w-12 h-12 relative mr-2">
             <% if meal.user.avatar.present? %>
@@ -30,7 +30,6 @@
     </div>
   </div>
   <div class="p-4 border-t border-gray-200 flex justify-between">
-    <%= link_to '編集', edit_meal_path(meal), class: "text-blue-500 hover:text-blue-700" %>
     <%= button_to '削除', meal_path(meal), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "text-red-500 hover:text-red-700" %>
   </div>
 </div>

@@ -2,7 +2,7 @@ class MealsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @meals = current_user.meals.includes(:meal_images_attachments, :meal_details, :user).order(meal_date: :desc).page(params[:page])
+    @meals = current_user.meals.includes(:meal_details, :user).order(meal_date: :desc).page(params[:page])
   end
 
   def show
@@ -16,7 +16,6 @@ class MealsController < ApplicationController
 
   def edit
     load_meal
-
     @meal_form = MealForm.new(meal: @meal)
     redirect_to root_url, status: :see_other if @meal_form.nil?
   end
@@ -24,22 +23,26 @@ class MealsController < ApplicationController
   def create
     @meal_form = MealForm.new(meal_params)
     if @meal_form.save
+      meal = @meal_form.meal
+      if params.dig(:meal, :meal_images).present?
+        meal.meal_images = params[:meal][:meal_images]
+        meal.save!
+      end
       redirect_to dashboard_path, success: t('defaults.message.created', item: Meal.model_name.human)
     else
       flash.now['error'] = t('defaults.message.not_created', item: Meal.model_name.human)
       render :new, status: :unprocessable_entity
     end
-  end
+  end  
 
   def update
     load_meal
-
     @meal_form = MealForm.new(meal_params, meal: @meal)
     if @meal_form.save
-      if params.dig(:meal, :meal_images)[1].present?
-        images = ActiveStorage::Attachment.where(record_id: params[:id])
-        images.each(&:purge)
-        @meal.meal_images.attach(params[:meal][:meal_images])
+      if params.dig(:meal, :meal_images).present?
+        @meal.remove_meal_images! if @meal.meal_images.present?
+        @meal.meal_images = params[:meal][:meal_images]
+        @meal.save!
       end
       redirect_to dashboard_path, success: t('defaults.message.updated', item: Meal.model_name.human)
     else
@@ -63,8 +66,7 @@ class MealsController < ApplicationController
   end
 
   def meals_feed
-    @feed_items = Meal.includes(:meal_images_attachments,
-                                user: :avatar_attachment).where(user_id: [*current_user.following_ids]).order(meal_date: :desc).page(params[:page])
+    @feed_items = Meal.includes(:user).where(user_id: [*current_user.following_ids]).order(meal_date: :desc).page(params[:page])
   end
 
   private
@@ -74,7 +76,7 @@ class MealsController < ApplicationController
                                  :meal_title_first, :meal_weight_first, :meal_calorie_first,
                                  :meal_title_second, :meal_weight_second, :meal_calorie_second,
                                  :meal_title_third, :meal_weight_third, :meal_calorie_third,
-                                 meal_images: []).merge(user_id: current_user.id)
+                                 { meal_images: [] }).merge(user_id: current_user.id)
   end
 
   def load_meal

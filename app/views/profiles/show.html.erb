@@ -8,7 +8,7 @@
     <div class="text-center mb-4">
       <strong><%= t('profiles.show.avatar') %>:</strong>
       <% if @user.avatar.present? %>
-        <%= image_tag @user.avatar, alt: "User's Avatar", class: "mx-auto mt-2 rounded-full" %>
+        <%= image_tag @user.avatar.url, alt: "User's Avatar", class: "mx-auto mt-2 rounded-full" %>
       <% else %>
         <p><%= t('profiles.show.no_avatar') %></p>
       <% end %>

@@ -2,9 +2,9 @@ class AttachmentValidator < ActiveModel::EachValidator
   include ActiveSupport::NumberHelper
 
   def validate_each(record, attribute, value)
-    return if value.blank? || !value.attached?
-
-    has_error = false
+    return if value.all? { |v| v.present? && v.file.present? }
+  
+    has_error = false  
 
     if options[:maximum]
       if value.is_a?(ActiveStorage::Attached::Many)
