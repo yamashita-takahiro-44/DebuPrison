@@ -32,6 +32,13 @@ ja:
       title: "投稿詳細"
 
   exercises:
+    form:
+      type: "種類"
+      duration: "時間（分）"
+      calories_burned: "消費カロリー"
+      date_time: "日付・時間"
+      submit: "送信"
+      calories_placeholder: "自動計算のため入力不要です"
     index:
       title: "エクササイズリスト"
       new_exercise: "新しいエクササイズ"
@@ -61,7 +68,7 @@ ja:
       height_private: "非公開"
       current_weight: "現在の体重"
       weight_private: "非公開"
-      bmr: "基礎代謝"
+      bmr: "基礎的な消費カロリー"
       target_weight: "目標体重まで"
       not_set: "設定されていません"
       edit_button: "プロフィールを編集"
@@ -84,6 +91,19 @@ ja:
       errors_title: "エラー"
       errors_message: "このユーザーの保存を禁止しました"
 
+  posts:
+    index:
+      title: "投稿一覧"
+    show:
+      title: "投稿詳細"
+      defaults:
+        edit: "編集"
+        destroy: "削除"
+        destroy?: "本当に削除してもよろしいですか？"
+  defaults:
+    edit: "編集"
+    destroy: "削除"
+    destroy?: "本当に削除してもよろしいですか？"
 
   activerecord:
     attributes:

@@ -25,11 +25,10 @@ Rails.application.routes.draw do
   # ダッシュボード
   resource :dashboard, only: [:show]
   resource :profile, only: [:show, :edit, :update]
+  get 'profile/:id', to: 'profiles#show', as: 'profile_show'
 
   get 'privacy', to: 'pages#privacy', as: 'privacy'
   get 'service', to: 'pages#service', as: 'service'
-
-  get 'foods/search', to: 'foods#search'
 
   resources :exercises do
     collection do

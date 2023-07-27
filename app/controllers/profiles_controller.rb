@@ -1,8 +1,12 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:edit, :update]
 
   def show
+    @user = User.find_by(id: params[:id])
+    unless @user
+      redirect_to root_path, alert: "ユーザーが見つかりません"
+    end
   end
 
   def edit

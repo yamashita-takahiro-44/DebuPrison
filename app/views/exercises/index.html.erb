@@ -1,16 +1,16 @@
 <div class="container mx-auto px-4 py-8">
-  <h1 class="text-2xl font-semibold mb-6"><%= t('exercises.list_title') %></h1>
+  <h1 class="text-2xl font-semibold mb-6"><%= t('exercises.index.title') %></h1>
 
-  <%= link_to t('exercises.new_exercise'), new_exercise_path, class: "mb-4 inline-block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" %>
+  <%= link_to t('exercises.index.new_exercise'), new_exercise_path, class: "mb-4 inline-block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" %>
 
   <table class="min-w-full bg-white shadow-md rounded">
     <thead class="bg-gray-800 text-white">
       <tr>
-        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.type') %></th>
-        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.duration') %></th>
-        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.calories_burned') %></th>
-        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.date_time') %></th>
-        <th class="py-2 px-3 text-left"><%= t('exercises.actions') %></th>
+        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.index.table.type') %></th>
+        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.index.table.duration') %></th>
+        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.index.table.calories_burned') %></th>
+        <th class="w-1/4 py-2 px-3 text-left"><%= t('exercises.index.table.date_time') %></th>
+        <th class="py-2 px-3 text-left"><%= t('exercises.index.table.actions') %></th>
       </tr>
     </thead>
     <tbody>
@@ -21,13 +21,14 @@
           <td class="py-2 px-3"><%= exercise.calories_burned %></td>
           <td class="py-2 px-3"><%= exercise.date_time.strftime('%Y-%m-%d %H:%M') %></td>
           <td class="py-2 px-3">
-            <%= link_to t('exercises.show'), exercise_path(exercise), class: "text-blue-500 hover:text-blue-600" %> |
-            <%= link_to t('exercises.edit'), edit_exercise_path(exercise), class: "text-yellow-500 hover:text-yellow-600" %> |
-            <%= link_to t('exercises.delete'), exercise_path(exercise), method: :delete, data: { confirm: t('exercises.delete_confirmation') }, class: "text-red-500 hover:text-red-600" %>
+            <%= link_to t('exercises.index.table.show'), exercise_path(exercise), class: "text-blue-500 hover:text-blue-600" %> |
+            <%= link_to t('exercises.index.table.edit'), edit_exercise_path(exercise), class: "text-yellow-500 hover:text-yellow-600" %> |
+            <%= link_to t('exercises.index.table.delete'), exercise_path(exercise), method: :delete, data: { confirm: t('exercises.index.table.delete_confirmation') }, class: "text-red-500 hover:text-red-600" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
 

@@ -1,27 +1,26 @@
 <%= form_with(model: exercise, class: 'space-y-4 max-w-md mx-auto') do |f| %>
   <div class="flex flex-col">
-    <%= f.label :exercise_type_id, "Type", class: 'mb-2 font-semibold' %>
+    <%= f.label :exercise_type_id, t('exercises.form.type'), class: 'mb-2 font-semibold' %>
     <%= f.collection_select :exercise_type_id, ExerciseType.all, :id, :name, {}, {class: 'form-input w-full p-2 border rounded'} %>
   </div>
 
   <div class="flex flex-col">
-    <%= f.label :duration, "Duration (minutes)", class: 'mb-2 font-semibold' %>
+    <%= f.label :duration, t('exercises.form.duration'), class: 'mb-2 font-semibold' %>
     <%= f.number_field :duration, class: 'form-input w-full p-2 border rounded' %>
   </div>
 
   <div class="flex flex-col">
-    <%= f.label :calories_burned, "Calories Burned", class: 'mb-2 font-semibold' %>
-    <%= f.number_field :calories_burned, placeholder: "自動計算のため入力不要です", class: 'form-input w-full p-2 border rounded' %>
+    <%= f.label :calories_burned, t('exercises.form.calories_burned'), class: 'mb-2 font-semibold' %>
+    <%= f.number_field :calories_burned, placeholder: t('exercises.form.calories_placeholder'), class: 'form-input w-full p-2 border rounded' %>
   </div>
 
-
   <div class="flex flex-col">
-    <%= f.label :date_time, class: 'mb-2 font-semibold' %>
+    <%= f.label :date_time, t('exercises.form.date_time'), class: 'mb-2 font-semibold' %>
     <%= f.datetime_field :date_time, class: 'form-input w-full p-2 border rounded' %>
   </div>
 
   <div class="flex justify-center mt-6">
-    <%= f.submit 'Submit', class: 'bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-bold' %>
+    <%= f.submit t('exercises.form.submit'), class: 'bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-bold' %>
   </div>
 <% end %>
 
@@ -48,3 +47,4 @@
     durationInput.addEventListener("input", fetchCaloriesBurned);
   });
 </script>
+

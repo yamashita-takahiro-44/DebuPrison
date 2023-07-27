@@ -67,7 +67,7 @@
           プロフィール
         </button>
         <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
-          <%= link_to '表示', profile_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
+          <%= link_to '表示', profile_show_path(current_user.id), class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
           <%= link_to '編集', edit_profile_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
         </ul>
       </div>

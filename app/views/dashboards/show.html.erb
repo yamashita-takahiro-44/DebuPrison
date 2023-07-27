@@ -7,9 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-        <div class="min-h-screen bg-gray-100 p-6">
+    <div class="min-h-screen bg-gray-100 p-6">
         <div class="max-w-7xl mx-auto h-screen"> 
-
             <!-- Full-width Weight graph -->
             <div class="w-full h-full"> 
                 <div class="bg-white rounded p-4 shadow h-full"> 
@@ -30,12 +29,11 @@
             var basalMetabolicRate = <%= @basal_metabolic_rate %>;
             var totalCaloriesBurned = <%= @total_calories_burned %>;
             var totalCaloriesEaten = <%= @total_calories_eaten %>;
-            var totalCaloriesBurnedAndBMR = basalMetabolicRate + totalCaloriesBurned;
 
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['現在の体重', '目標体重', '基礎代謝+消費カロリー', '本日の食事の総摂取カロリー'],
+                    labels: ['現在の体重', '目標体重', '基礎的な消費カロリー+消費カロリー', '本日の食事の総摂取カロリー'],
                     datasets: [{
                         type: 'line',
                         label: '体重 (kg)',
@@ -49,7 +47,7 @@
                     {
                         type: 'bar',
                         label: 'カロリー',
-                        data: [null, null, totalCaloriesBurnedAndBMR, totalCaloriesEaten],
+                        data: [null, null, totalCaloriesBurned, totalCaloriesEaten],
                         yAxisID: 'y-axis-calories',
                         backgroundColor: [
                             'rgba(0,0,0,0)',
@@ -88,7 +86,6 @@
                 }
             });
         });
-
     </script>
 </body>
 </html>

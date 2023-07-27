@@ -7,8 +7,14 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    set_meta_tags og: { image: view_context.image_url(@post.image.url) }, twitter: { image: view_context.image_url(@post.image.url) }
-    # ... 他のコード ...
+    
+    image_source = if @post.image.present? && @post.image.url.present?
+                     view_context.image_url(@post.image.url)
+                   else
+                     view_context.image_url('default-avatar.png')  # デフォルトのアバターのパスを指定
+                   end
+  
+    set_meta_tags og: { image: image_source }, twitter: { image: image_source }
   end
 
   def new
