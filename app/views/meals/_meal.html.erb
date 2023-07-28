@@ -1,7 +1,7 @@
 <div class="bg-white shadow-lg mx-4 my-2 md:w-96 rounded-lg overflow-hidden">
   <div class="relative h-40">
-    <% if meal.meal_images.any? %>
-  <%= image_tag meal.meal_images.last.thumb.url, class: "absolute h-full w-full object-cover" %>
+    <% if meal.meal_image.present? %>
+  <%= image_tag meal.meal_image.thumb.url, class: "absolute h-full w-full object-cover" %>
 <% else %>
   <%= image_tag('meal_sample.png', class: "absolute h-full w-full object-cover") %>
 <% end %>

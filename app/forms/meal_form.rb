@@ -16,7 +16,7 @@ class MealForm
   attribute :meal_title_third, :string
   attribute :meal_weight_third, :integer
   attribute :meal_calorie_third, :integer
-  attribute :meal_images
+  attribute :meal_image
 
   validates :meal_date, presence: true
   validates :meal_period, presence: true
@@ -28,28 +28,40 @@ class MealForm
 
   delegate :persisted?, to: :meal
 
-  def initialize(attributes = nil, meal: Meal.new)
-    @meal = meal
-    attributes ||= default_attributes
+  def initialize(attributes = {})
+    @meal = attributes[:meal] || Meal.new(user_id: attributes[:user_id])
+    
+    Rails.logger.debug "渡された画像: #{attributes[:meal_image].inspect}"
+    Rails.logger.debug "既存のMealの画像: #{@meal.meal_image.inspect}"
+  
+    # 画像が渡されていない場合、既存のmealの画像をデフォルトとして使用します。
+    attributes[:meal_image] ||= @meal.meal_image if @meal.meal_image.present?
+  
     super(attributes)
   end
+  
+  
 
   def save
     return false if invalid?
 
-    if meal.meal_details.size > 3
-      (3...meal.meal_details.size).each do
-        meal.meal_details.last.delete
-      end
-    end
-
     ActiveRecord::Base.transaction do
-      if meal.meal_images.blank?
-        meal.update!(meal_date: meal_date, meal_period: meal_period, meal_type: meal_type, meal_memo: meal_memo, user_id: user_id)
-      else
-        meal.update!(meal_date: meal_date, meal_period: meal_period, meal_type: meal_type, meal_memo: meal_memo, user_id: user_id, meal_images: meal_images)
-      end
-      
+      meal.update!(meal_date: meal_date, 
+                   meal_period: meal_period, 
+                   meal_type: meal_type, 
+                   meal_memo: meal_memo, 
+                   user_id: user_id, 
+                   meal_image: meal_image,
+                   meal_title_first: meal_title_first, 
+                   meal_weight_first: meal_weight_first,
+                   meal_calorie_first: meal_calorie_first,
+                   meal_title_second: meal_title_second, 
+                   meal_weight_second: meal_weight_second, 
+                   meal_calorie_second: meal_calorie_second, 
+                   meal_title_third: meal_title_third, 
+                   meal_weight_third: meal_weight_third, 
+                   meal_calorie_third: meal_calorie_third)
+
       update_or_create_detail(meal_title_first, meal_weight_first, meal_calorie_first, 0)
       update_or_create_detail(meal_title_second, meal_weight_second, meal_calorie_second, 1)
       update_or_create_detail(meal_title_third, meal_weight_third, meal_calorie_third, 2)
@@ -71,7 +83,7 @@ class MealForm
 
   def update_or_create_detail(title, weight, calorie, index)
     detail = meal.meal_details[index]
-    
+
     if title.blank?
       detail&.delete
       return
@@ -89,9 +101,9 @@ class MealForm
       user_id: meal.user_id,
       meal_date: meal.meal_date,
       meal_period: meal.meal_period_before_type_cast,
-      meal_type: meal.meal_period_before_type_cast,
+      meal_type: meal.meal_type_before_type_cast,
       meal_memo: meal.meal_memo,
-      meal_images: meal.meal_images,
+      meal_image: meal.meal_image,
       meal_title_first: meal_title_or_empty(0),
       meal_weight_first: meal_weight_or_empty(0),
       meal_calorie_first: meal_calorie_or_empty(0),

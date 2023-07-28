@@ -7,7 +7,7 @@
     </div>
   <% end %>
   <div class="mt-6">
-    <%= form_with model: @meal_form, local: true do |f| %>
+<%= form_with url: meals_path, method: :post, local: true, html: { enctype: 'multipart/form-data' }, scope: :meal do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
       <div>
         <div class="mb-4">
@@ -81,8 +81,8 @@
           <%= f.text_area :meal_memo, class: "p-2 border rounded w-full" %>
         </div>
         <div class="mt-4">
-          <%= f.label :meal_images, class: "block text-xl font-bold mb-2" %>
-          <%= f.file_field :meal_images, class: "p-2 border rounded w-full", multiple: true %>
+          <%= f.label :meal_image, class: "block text-xl font-bold mb-2" %>
+          <%= f.file_field :meal_image, class: "p-2 border rounded w-full"%>
         </div>
         <div class="mt-4">
           <%= f.submit '投稿する', class: "py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700" %>

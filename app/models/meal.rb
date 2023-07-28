@@ -4,13 +4,8 @@ class Meal < ApplicationRecord
 
   belongs_to :user
   has_many :meal_details, dependent: :destroy
-  has_many_attached :meal_images do |attachable|
-    attachable.variant :thumb, resize_to_limit: [400, 400]
-  end
 
-  validates :meal_images, attachment: { purge: true, content_type: %r{\Aimage/(png|jpeg|jpg)\Z}, maximum: 5_242_880 }
-
-  mount_uploaders :meal_images, MealImageUploader
+  mount_uploader :meal_image, MealImageUploader
 
   validate :user_name_present
 

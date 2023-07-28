@@ -21,19 +21,18 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal_form = MealForm.new(meal_params)
+    @meal = Meal.new
+    # フォームオブジェクトのインスタンスを作成
+    @meal_form = MealForm.new(meal_params.merge(user_id: current_user.id))
+  
     if @meal_form.save
       meal = @meal_form.meal
-      if params.dig(:meal, :meal_images).present?
-        meal.meal_images = params[:meal][:meal_images]
-        meal.save!
-      end
       redirect_to dashboard_path, success: t('defaults.message.created', item: Meal.model_name.human)
     else
       flash.now['error'] = t('defaults.message.not_created', item: Meal.model_name.human)
       render :new, status: :unprocessable_entity
     end
-  end  
+  end
 
   def update
     load_meal
@@ -73,11 +72,13 @@ class MealsController < ApplicationController
 
   def meal_params
     params.require(:meal).permit(:meal_date, :meal_period, :meal_type, :meal_memo,
-                                 :meal_title_first, :meal_weight_first, :meal_calorie_first,
-                                 :meal_title_second, :meal_weight_second, :meal_calorie_second,
-                                 :meal_title_third, :meal_weight_third, :meal_calorie_third,
-                                 { meal_images: [] }).merge(user_id: current_user.id)
-  end
+                  :meal_title_first, :meal_weight_first, :meal_calorie_first,
+                  :meal_title_second, :meal_weight_second, :meal_calorie_second,
+                  :meal_title_third, :meal_weight_third, :meal_calorie_third, :meal_image)
+end
+
+ 
+
 
   def load_meal
     @meal = current_user.meals.find(params[:id])

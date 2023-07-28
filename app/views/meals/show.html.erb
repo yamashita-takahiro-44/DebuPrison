@@ -24,11 +24,9 @@
       <div class="flex justify-around">
         <div class="w-2/5 flex flex-col align-center">
           <h2 class="text-xl font-bold my-4 text-center"><%= @meal.meal_date.strftime("%Y年%m月%d日") %></h2>
-          <% if @meal.meal_images.present? %>
-            <% @meal.meal_images.each do |meal_image| %>
-              <%= image_tag meal_image.url(:thumb), class: "flex items-center m-2" if meal_image.url.present? %>
-            <% end %>
-          <% else %>
+          <% if @meal.meal_image.present? %>
+            <%= image_tag @meal.meal_image.url(:thumb), class: "flex items-center m-2" if @meal.meal_image.url.present? %>
+              <% else %>
             <%= image_tag('meal_sample.png', size: "400x400") %>
           <% end %>
         </div>
