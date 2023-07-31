@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
         title: :title,
         type: 'website',
         url: request.original_url,
-        image: 'logo.png',
+        image: "#{request.base_url}#{ActionController::Base.helpers.asset_path('logo.png')}",
         site_name: :site,
         description: :description
       }

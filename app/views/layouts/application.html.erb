@@ -33,19 +33,22 @@
 
   <body>
     <% if user_signed_in? %>
-      <%= render 'shared/header' %>
-    <% else %>
-      <%= render 'shared/before_login_header' %>
-    <% end %>
-    <%= render 'shared/flash_message' %>
-    <%= yield %>
-    <%= render 'shared/footer' %>
-    
-    <% if flash[:alert] %>
-      <div class="alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-    <% end %>
+<%= render 'shared/header' %>
+<% else %>
+<%= render 'shared/before_login_header' %>
+<% end %>
+
+<%= render 'shared/flash_message' %>
+
+<% if flash[:alert] %>
+<div class="alert alert-danger">
+<%= flash[:alert] %>
+</div>
+<% end %>
+
+<%= yield %>
+
+<%= render 'shared/footer' %>
   </body>
 </html>
 
