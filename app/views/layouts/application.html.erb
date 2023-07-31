@@ -2,18 +2,19 @@
 <html data-theme="cupcake" class="font-top text-maincolor">
   <head>
   <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EMJ9EWM7BC"></script>
-    <script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-96LYQWH39N"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-EMJ9EWM7BC');
-    </script>
+    gtag('config', 'G-96LYQWH39N');
+  </script>
     <title>DebuPrison</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= display_meta_tags(default_meta_tags) %>
 
     <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Kosugi+Maru&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/95ae21fd7d.js" crossorigin="anonymous"></script>
@@ -32,19 +33,22 @@
 
   <body>
     <% if user_signed_in? %>
-      <%= render 'shared/header' %>
-    <% else %>
-      <%= render 'shared/before_login_header' %>
-    <% end %>
-    <%= render 'shared/flash_message' %>
-    <%= yield %>
-    <%= render 'shared/footer' %>
-    
-    <% if flash[:alert] %>
-      <div class="alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-    <% end %>
+<%= render 'shared/header' %>
+<% else %>
+<%= render 'shared/before_login_header' %>
+<% end %>
+
+<%= render 'shared/flash_message' %>
+
+<% if flash[:alert] %>
+<div class="alert alert-danger">
+<%= flash[:alert] %>
+</div>
+<% end %>
+
+<%= yield %>
+
+<%= render 'shared/footer' %>
   </body>
 </html>
 
