@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show] # 1. ログインユーザーのみアクセス許可
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy] # 2. 投稿の所有者のみアクセス許可
   
   def index
     @posts = Post.order(created_at: :desc).page(params[:page]).per(15)
@@ -57,5 +58,11 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content, :image, :title)
+  end
+
+  def ensure_correct_user
+    unless @post.user == current_user
+      redirect_to posts_path, alert: 'You are not authorized to perform this action.'
+    end
   end
 end

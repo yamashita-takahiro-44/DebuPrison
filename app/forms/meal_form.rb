@@ -36,6 +36,22 @@ class MealForm
   
     # 画像が渡されていない場合、既存のmealの画像をデフォルトとして使用します。
     attributes[:meal_image] ||= @meal.meal_image if @meal.meal_image.present?
+
+    if attributes[:meal_period].is_a?(String)
+      if Meal.meal_periods.has_key?(attributes[:meal_period])
+        attributes[:meal_period] = Meal.meal_periods[attributes[:meal_period]]
+      else
+        errors.add(:meal_period, "is not a valid value")
+      end
+    end
+    
+    if attributes[:meal_type].is_a?(String)
+      if Meal.meal_types.has_key?(attributes[:meal_type])
+        attributes[:meal_type] = Meal.meal_types[attributes[:meal_type]]
+      else
+        errors.add(:meal_type, "is not a valid value")
+      end
+    end
   
     super(attributes)
   end
