@@ -2,8 +2,9 @@ class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
 
   def index
-    @exercises = current_user.exercises.order(date_time: :desc)
+    @exercises = current_user.exercises.order(date_time: :desc).page(params[:page]).per(10)
   end
+  
 
   def show
   end
