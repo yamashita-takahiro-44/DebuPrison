@@ -3,12 +3,20 @@
 ## サービス概要
 Debu Prisonは、ダイエットを継続したい人に向けた
 プラットフォームサービスです。
+https://debuprison.com/
 
 ##　想定されるユーザー層
 ダイエットを継続したいが、一人では継続できなかった人
 ダイエット仲間が欲しい人
 ダイエットを始めたいと思っている人
 らんてっくダイエット部員
+
+## このサービスの背景
+私はひょんなことから、RUNTEQコミュニティ内のダイエット部に入部しました。
+しかし私はどちらかというと痩せ型の体型のため、他の部員を取り締まるデブ警察に就任しました。
+ダイエット部員たちはしばしばラーメンなど高カロリーなものを食べ、SNSに投稿しているため
+それらを取り締まるサービスの必要性を感じ、このアプリの作成に至りました。
+なお自身も中年太りが始まっているので自身でも使いたいアプリを目指しています。
 
 ## サービスコンセプト
 この「Debu Prison」Webアプリが解決しようとする主な課題は次の通りです：
@@ -44,3 +52,36 @@ Debu Prisonは、ダイエットを継続したい人に向けた
 * 既存のヘルスデバイスとの連携（Apple Watchなど）
 
 https://www.figma.com/file/wlCx53FhaGrOURnEpFs1ML/diet_challenge?type=design&node-id=0%3A1&mode=design&t=ybv9J5Ez5aKTb7H9-1 
+
+### 使用技術
+全体の構成
+バックエンド
+Ruby(3.2.2)
+Ruby on Rails(7.0.6)
+
+フロントエンド
+TailwindCSS
+daisyUI
+
+インフラ
+PostgreSQL
+Fly.io
+AWS(Amazon S3)
+
+API	その他
+DeepL API
+Nutrition by API-Ninjas API(RapidAPI)	Cloudflare(独自ドメインの SSL 化)
+Google アナリティクス(GA4)
+Google サーチコンソール
+
+主要ライブラリ（gem）
+devise（ユーザー登録、ログイン/ログアウト、パスワードリセット）
+kaminari（ページネーション）
+simple_calendar（カレンダー機能）
+rails-i18n（i18n 国際化対応）
+enum_help（enum 定義の i18n）
+config（環境別の定数管理）
+sitemap_generator（サイトマップの作成）
+meta-tags（OGP、メタタグの設定）
+faraday（HTTP クライアント）
+なお、画像アップロードにはCarrierwaveを使用
