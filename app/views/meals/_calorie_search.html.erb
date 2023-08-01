@@ -6,9 +6,9 @@
         <%= f.label :calorie_search, (t 'defaults.calorie_search') %>
         <%= f.text_field :calorie_search, class: "input input-bordered" %>
       </div>
-      <div class="form-control my-4">
-        <%= f.submit '検索する', class: "btn btn-primary"%>
-      </div>
+      <div class="mt-4">
+          <%= f.submit '検索する', class: "py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700" %>
+        </div>
     <% end %>
   </div>
   <% if response.present? %>
