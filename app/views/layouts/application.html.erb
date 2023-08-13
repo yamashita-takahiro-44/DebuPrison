@@ -15,6 +15,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= display_meta_tags(default_meta_tags) %>
+    <link rel="icon" type="image/png" href="/favicon.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Kosugi+Maru&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/95ae21fd7d.js" crossorigin="anonymous"></script>
@@ -39,12 +40,6 @@
 <% end %>
 
 <%= render 'shared/flash_message' %>
-
-<% if flash[:alert] %>
-<div class="alert alert-danger">
-<%= flash[:alert] %>
-</div>
-<% end %>
 
 <%= yield %>
 

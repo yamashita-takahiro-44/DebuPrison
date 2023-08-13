@@ -20,6 +20,22 @@
     .menu-button-space {
         margin-right: 20px; /* あるいは、任意のピクセル数に変更して調整してください */
     }
+
+
+    .dropdown-button {
+        cursor: pointer; /* カーソルをポインタに変更 */
+        position: relative;
+        padding-right: 25px; /* アイコンスペースのためのパディング */
+    }
+    
+    .dropdown-button::after {
+        content: '▼'; /* ドロップダウンインジケータ */
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 12px;
+    }
 </style>
 
 <header data-theme="retro" class="py-10 bg-blue-500">
@@ -33,9 +49,9 @@
       <%= link_to (t 'dashboards.show.title'), dashboard_path, class: "text-headfoot custom-green shadow-md p-2 rounded text-white menu-button-space" %>
 
       <div class="relative inline-block dropdown-hover menu-button-space">
-        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
-          食事記録
-        </button>
+    <button class="btn btn-primary custom-green text-white my-1 dropdown-button shadow-md p-2 rounded">
+      食事記録
+    </button>
         <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
           <%= link_to '一覧', meals_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
           <%= link_to '作成', new_meal_path, class: "btn btn-primary custom-green text-white my-2 block shadow-md p-2 rounded" %>
@@ -43,7 +59,7 @@
       </div>
 
       <div class="relative inline-block dropdown-hover menu-button-space">
-        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
+    <button class="btn btn-primary custom-green text-white my-1 dropdown-button shadow-md p-2 rounded">
           運動記録
         </button>
         <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
@@ -53,7 +69,7 @@
       </div>
 
       <div class="relative inline-block dropdown-hover menu-button-space">
-        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
+    <button class="btn btn-primary custom-green text-white my-1 dropdown-button shadow-md p-2 rounded">
           掲示板
         </button>
         <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">
@@ -63,7 +79,7 @@
       </div>
 
       <div class="relative inline-block dropdown-hover menu-button-space">
-        <button class="btn btn-primary custom-green text-white my-1 cursor-pointer shadow-md p-2 rounded">
+    <button class="btn btn-primary custom-green text-white my-1 dropdown-button shadow-md p-2 rounded">
           プロフィール
         </button>
         <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 absolute left-0" style="display: none;">

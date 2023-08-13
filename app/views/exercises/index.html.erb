@@ -19,7 +19,7 @@
           <td class="py-2 px-3"><%= exercise.exercise_type.name %></td>
           <td class="py-2 px-3"><%= exercise.duration %></td>
           <td class="py-2 px-3"><%= exercise.calories_burned %></td>
-          <td class="py-2 px-3"><%= exercise.date_time.strftime('%Y-%m-%d %H:%M') %></td>
+          <td class="py-2 px-3"><%= exercise.date_time ? exercise.date_time.strftime('%Y-%m-%d %H:%M') : 'N/A' %></td>
           <td class="py-2 px-3">
             <%= link_to t('exercises.index.table.show'), exercise_path(exercise), class: "text-blue-500 hover:text-blue-600" %> |
             <%= link_to t('exercises.index.table.edit'), edit_exercise_path(exercise), class: "text-yellow-500 hover:text-yellow-600" %> |
